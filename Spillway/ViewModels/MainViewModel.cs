@@ -39,6 +39,7 @@ namespace Spillway.ViewModels
 		public MainViewModel()
 		{
 			_Settings = new List<Object>();
+			_Settings.Add(new ProfileViewModel());
 		}
 
 	}
