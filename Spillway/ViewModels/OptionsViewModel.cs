@@ -7,21 +7,11 @@ using System.Threading.Tasks;
 
 namespace Spillway.ViewModels
 {
-	public class ProfileViewModel : ViewModelBase, ISection
+	public class OptionsViewModel: ViewModelBase, ISection
 	{
-		private String _LoginName;
-
-		public String LoginName
-		{
-			get { return _LoginName; }
-			set { _LoginName = value; }
-		}
-
-
-
 		public override string ToString()
 		{
-			return "Profile";
+			return "Options";
 		}
 
 		public String SectionName

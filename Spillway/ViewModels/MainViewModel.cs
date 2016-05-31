@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spillway.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,18 +29,38 @@ namespace Spillway.ViewModels
 
 
 		//This will need to be renamed for in hte end
-		private IList<Object> _Settings;
+		private IList<ISection> _Settings;
 
-		public IList<Object> Settings
+		public IList<ISection> Settings
 		{
 			get { return _Settings; }
 			set { _Settings = value; }
 		}
 
+
+		private ISection _SelectedTab;
+		public ISection SelectedTab
+		{
+			get
+			{
+				return _SelectedTab;
+			}
+			set
+			{
+				if (_SelectedTab != value)
+				{
+					_SelectedTab = value;
+					OnPropertyChanged("SelectedTab");
+				}
+			}
+		}
+
 		public MainViewModel()
 		{
-			_Settings = new List<Object>();
+			_Settings = new List<ISection>();
 			_Settings.Add(new ProfileViewModel());
+			_Settings.Add(new OptionsViewModel());
+			_SelectedTab = _Settings.First();
 		}
 
 	}

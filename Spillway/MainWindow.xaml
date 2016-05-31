@@ -26,7 +26,7 @@
 				<ResourceDictionary.MergedDictionaries>
 					<ResourceDictionary Source="Resources/DataTemplates.xaml" />
 				</ResourceDictionary.MergedDictionaries>
-				
+
 				<Style TargetType="Label">
 					<Setter Property="FontStyle"
 							Value="Normal" />
@@ -37,7 +37,7 @@
 				</Style>
 
 			</ResourceDictionary>
-			
+
 		</Grid.Resources>
 		<Label Content="{Binding ProjectName}"
 			   Grid.Row="0"
@@ -53,7 +53,18 @@
 		<ListBox Grid.Row="1"
 				 Grid.Column="0"
 				 ItemsSource="{Binding Settings}"
+				 SelectedItem="{Binding SelectedTab}"
+				 HorizontalContentAlignment="Stretch"
 				 x:Name="ViewSelector">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<Grid HorizontalAlignment="Center">
+						<Label Margin="10"
+							   HorizontalAlignment="Center"
+							   Content="{Binding SectionName}" />
+					</Grid>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
 
 
 		</ListBox>
