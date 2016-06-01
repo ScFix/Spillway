@@ -102,6 +102,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -113,6 +114,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Spillway.Contracts\Spillway.Contracts.csproj">
+      <Project>{0a69a7a1-c59f-406f-9464-3e9eca2eb35c}</Project>
+      <Name>Spillway.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Spillway.Data\Spillway.Data.csproj">
+      <Project>{f5365655-586e-4ed1-ac3e-e45c76eb6774}</Project>
+      <Name>Spillway.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
