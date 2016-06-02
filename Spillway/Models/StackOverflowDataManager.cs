@@ -15,8 +15,8 @@ namespace Spillway.Models
 	{
 		// This Should be passed into via client_id 
 		private const string _clientId = "7246";
-		private const string _scope = "read_inbox,noexpiry,write_access,private_info";
-		private const string _redirectUrl = "www.stackexchange.com/oauth/login_success";
+		private const string _scope = "read_inbox,no_expiry,write_access,private_info";
+		private const string _redirectUrl = "https://stackexchange.com/oauth/login_success ";
 		private const string _accessUrl = "https://stackexchange.com/oauth/dialog";
 		private const string _requestKey = "TKxyoBaKAvQJy*kNpSXOiA((";
 		private string AccessToken;
@@ -33,7 +33,7 @@ namespace Spillway.Models
 		{
 			try
 			{
-				System.Diagnostics.Process.Start(_accessUrl + "?client_id=" + _clientId + "&scope=" + _scope + "&redirect_uri" + _redirectUrl);
+				System.Diagnostics.Process.Start(_accessUrl + "?client_id=" + _clientId + "&scope=" + _scope + "&redirect_uri=" + _redirectUrl);
 				return true;
 			}
 			catch (Exception e)
@@ -43,6 +43,10 @@ namespace Spillway.Models
 			}
 		}
 
-
+		//This will need to be tested before setting it. However this will get me up and running.
+		public void SetToken(string accessToken)
+		{
+			AccessToken = accessToken;
+		}
 	}
 }

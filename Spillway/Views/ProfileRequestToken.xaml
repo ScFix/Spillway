@@ -11,10 +11,11 @@
 			 d:DataContext="{d:DesignInstance Type=vm:ProfileViewModel, IsDesignTimeCreatable=True}">
 	<Grid HorizontalAlignment="Stretch"
 		  VerticalAlignment="Stretch">
-		<StackPanel VerticalAlignment="Center"
-					HorizontalAlignment="Center">
-			<TextBox Text="{Binding Token}"></TextBox>
-			<Button Command="{Binding SubmitToken}">Submit</Button>
+		<StackPanel VerticalAlignment="Center">
+			<Label FontSize="20">Instructions</Label>
+			<TextBlock> After you authorize the application please copy and paste the url into the box below submit the url for verification.</TextBlock>
+			<TextBox Text="{Binding TokenUrl, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+			<Button Command="{Binding SubmitTokenUrl}">Submit</Button>
 		</StackPanel>
 	</Grid>
 </UserControl>

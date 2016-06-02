@@ -13,5 +13,6 @@ namespace Spillway.Interfaces
 	{
 		bool RequestUserVerification();
 		bool HasCurrentSessionOpen();
+		void SetToken(string accessToken);
 	}
 }

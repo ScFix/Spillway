@@ -21,6 +21,7 @@ namespace Spillway.ViewModels
 	{
 
 		private IDataManager dataManager;
+		private string TokenTag = "access_token=";
 
 		public ProfileViewModel()
 		{
@@ -47,51 +48,59 @@ namespace Spillway.ViewModels
 		}
 		#endregion //ViewState
 
-		#region Token
-		protected String _Token;
-		public String Token
+		#region TokenUrl
+		protected String _TokenUrl;
+		public String TokenUrl
 		{
 			get
 			{
-				return _Token;
+				return _TokenUrl;
 			}
 			set
 			{
-				if (value != _Token)
+				if (value != _TokenUrl)
 				{
-					_Token = value;
-					OnPropertyChanged("Token");
+					_TokenUrl = value;
+					OnPropertyChanged("TokenUrl");
 				}
 			}
 		}
 		#endregion //Token
 
 
-		#region SubmitToken
-		protected ICommand _SubmitToken = null;
-		public ICommand SubmitToken
+		#region SubmitTokenUrl
+		protected ICommand _SubmitTokenUrl = null;
+		public ICommand SubmitTokenUrl
 		{
 			get
 			{
-				if (_SubmitToken == null)
+				if (_SubmitTokenUrl == null)
 				{
-					_SubmitToken = new RelayCommand(SubmitTokenExecute, CanSubmitToken);
+					_SubmitTokenUrl = new RelayCommand(SubmitTokenUrlExecute, CanSubmitTokenUrl);
 				}
-				return _SubmitToken;
+				return _SubmitTokenUrl;
 			}
 		}
 
-		private bool CanSubmitToken(object obj)
+		private bool CanSubmitTokenUrl(object obj)
 		{
-			return true;
+
+			return TokenUrl != null ? TokenUrl.Contains(TokenTag) : false;
 		}
 
-		private void SubmitTokenExecute(object obj)
+		private void SubmitTokenUrlExecute(object obj)
 		{
-			//TODO Implement the SubmitToken Method
+			string accessToken = ParseTokenOutOfUrl();
+			dataManager.SetToken(accessToken);
+
 			ViewState = ProfileViewState.CurrentProfile;
 		}
-		#endregion //SubmitToken
+
+		private string ParseTokenOutOfUrl()
+		{
+			return TokenUrl.Substring(TokenUrl.IndexOf(TokenTag) + TokenTag.Length);
+		}
+		#endregion //SubmitTokenUrl
 
 
 		#region AuthorizeApplication
