@@ -12,18 +12,10 @@
 			 d:DataContext="{d:DesignInstance Type=vm:ProfileViewModel, IsDesignTimeCreatable=True}">
 	<UserControl.Resources>
 		<DataTemplate x:Key="AuthorizeView">
-			<Grid VerticalAlignment="Center">
-				<Button Command="{Binding AuthorizeApplication}">Authorize Appliaction</Button>
-			</Grid>
+			<local:ProfileAuthorize />
 		</DataTemplate>
 		<DataTemplate x:Key="RequestTokenView">
-			<Grid>
-				<StackPanel VerticalAlignment="Center"
-							HorizontalAlignment="Center">
-					<TextBox Text="{Binding Token}"></TextBox>
-					<Button Command="{Binding SubmitToken}">Submit</Button>
-				</StackPanel>
-			</Grid>
+			<local:ProfileRequestToken />
 		</DataTemplate>
 		<DataTemplate x:Key="CurrentProfileView">
 			<local:ProfileOverview />
@@ -41,12 +33,12 @@
 		<Label HorizontalAlignment="Center"
 			   VerticalAlignment="Top"
 			   Content="{Binding SectionName}" />
-		<StackPanel VerticalAlignment="Center">
-			<ContentControl Content="{Binding}"
-							x:Name="content"
-							ContentTemplateSelector="{StaticResource ProfileTemplateSelector}" />
+		<ContentControl Content="{Binding}"
+						Grid.Row="1"
+						x:Name="content"
+						ContentTemplateSelector="{StaticResource ProfileTemplateSelector}" />
 
-		</StackPanel>
+
 
 	</Grid>
 </UserControl>

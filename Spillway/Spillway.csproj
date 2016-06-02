@@ -64,8 +64,14 @@
     <Compile Include="ViewModels\OptionsViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\ProfileAuthorize.xaml.cs">
+      <DependentUpon>ProfileAuthorize.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ProfileOverview.xaml.cs">
       <DependentUpon>ProfileOverview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProfileRequestToken.xaml.cs">
+      <DependentUpon>ProfileRequestToken.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProfileView.xaml.cs">
       <DependentUpon>ProfileView.xaml</DependentUpon>
@@ -86,7 +92,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ProfileAuthorize.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ProfileOverview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProfileRequestToken.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
