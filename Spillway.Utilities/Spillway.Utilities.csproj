@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F5365655-586E-4ED1-AC3E-E45C76EB6774}</ProjectGuid>
+    <ProjectGuid>{BE108B7D-71A8-4282-B639-5ADC3B4B7B0B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Spillway.Data</RootNamespace>
-    <AssemblyName>Spillway.Data</AssemblyName>
+    <RootNamespace>Spillway.Utilities</RootNamespace>
+    <AssemblyName>Spillway.Utilities</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,39 +32,18 @@
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Net.Http">
-      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Net.Http.WebRequest">
-      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Notifications.cs" />
-    <Compile Include="OAuth.cs" />
+    <Compile Include="RelayCommand.cs" />
+    <Compile Include="Tracing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Spillway.Contracts\Spillway.Contracts.csproj">
-      <Project>{0a69a7a1-c59f-406f-9464-3e9eca2eb35c}</Project>
-      <Name>Spillway.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Spillway.Utilities\Spillway.Utilities.csproj">
-      <Project>{be108b7d-71a8-4282-b639-5adc3b4b7b0b}</Project>
-      <Name>Spillway.Utilities</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

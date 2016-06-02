@@ -19,23 +19,7 @@
 			   Content="{Binding SectionName}" />
 		<StackPanel Grid.Row="1" VerticalAlignment="Center">
 			<Grid>
-				<Grid.RowDefinitions>
-					<RowDefinition />
-					<RowDefinition />
-					<RowDefinition />
-				</Grid.RowDefinitions>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition />
-					<ColumnDefinition />
-				</Grid.ColumnDefinitions>
-				<Label Grid.Row="0">User Name</Label>
-				<TextBox Grid.Row="0"
-						 Grid.Column="1"></TextBox>
-				<Label Grid.Row="1">Password</Label>
-				<TextBox Grid.Row="1"
-						 Grid.Column="1"></TextBox>
-				<Button Grid.Row="2"
-						Grid.ColumnSpan="2"> Login</Button>
+				<Button Command="{Binding SignIn}">Sign in</Button>
 			</Grid>
 		</StackPanel>
 

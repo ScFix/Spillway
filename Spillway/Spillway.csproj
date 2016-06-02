@@ -124,6 +124,10 @@
       <Project>{f5365655-586e-4ed1-ac3e-e45c76eb6774}</Project>
       <Name>Spillway.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Spillway.Utilities\Spillway.Utilities.csproj">
+      <Project>{be108b7d-71a8-4282-b639-5adc3b4b7b0b}</Project>
+      <Name>Spillway.Utilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

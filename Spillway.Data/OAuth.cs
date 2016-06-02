@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+/// <summary>
+/// This is a unique library function and file that I have found when searching for a proper and simple technique to do all of my require OAuth2 communication.
+/// <see cref="http://www.deanhume.com/Home/BlogPost/a-simple-guide-to-using-oauth-with-c-/49"/> For a more complete read through of all of the ways this class implements the OAuth2
+/// </summary>
 namespace Spillway.Data
 {
 	namespace OAuth
@@ -12,8 +15,7 @@ namespace Spillway.Data
 		using System.Linq;
 		using System.Collections.Generic;
 		using System.Security.Cryptography;
-
-		using CropperPlugins.Utils;
+		using Spillway.Utilities;
 
 		/// <summary>
 		///   A class to manage OAuth interactions.  This works with
