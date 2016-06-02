@@ -4,6 +4,6 @@
 					xmlns:vm="clr-namespace:Spillway.ViewModels"
 					xmlns:v="clr-namespace:Spillway.Views">
 	<DataTemplate DataType="{x:Type vm:ProfileViewModel}">
-		<v:ProfileView />
+		<v:ProfileView ViewState="{Binding ViewState}" />
 	</DataTemplate>
 </ResourceDictionary>

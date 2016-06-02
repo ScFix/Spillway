@@ -55,11 +55,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Interfaces\IDataManager.cs" />
+    <Compile Include="Interfaces\IProfile.cs" />
     <Compile Include="Interfaces\ISection.cs" />
+    <Compile Include="Models\StackOverflowDataManager.cs" />
+    <Compile Include="TemplateSelectors\ProfileViewTemplateSelector.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\OptionsViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\ProfileOverview.xaml.cs">
+      <DependentUpon>ProfileOverview.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ProfileView.xaml.cs">
       <DependentUpon>ProfileView.xaml</DependentUpon>
     </Compile>
@@ -76,6 +83,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Resources\DataTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProfileOverview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -112,17 +123,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Spillway.Contracts\Spillway.Contracts.csproj">
       <Project>{0a69a7a1-c59f-406f-9464-3e9eca2eb35c}</Project>
       <Name>Spillway.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Spillway.Data\Spillway.Data.csproj">
-      <Project>{f5365655-586e-4ed1-ac3e-e45c76eb6774}</Project>
-      <Name>Spillway.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Spillway.Utilities\Spillway.Utilities.csproj">
       <Project>{be108b7d-71a8-4282-b639-5adc3b4b7b0b}</Project>
