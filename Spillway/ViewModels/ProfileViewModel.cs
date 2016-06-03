@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Spillway.ViewModels
@@ -19,18 +20,32 @@ namespace Spillway.ViewModels
 	}
 	public class ProfileViewModel : ViewModelBase, ISection, IProfile
 	{
+		#region Members
 
 		private IDataManager dataManager;
 		private string TokenTag = "access_token=";
 
+		#endregion //Members
+
 		public ProfileViewModel()
 		{
 			dataManager = new StackOverflowDataManager();
+			dataManager.UserChangedEvent += DataManager_UserChangedEvent;
+			ImageCache.ImageLoaded += ImageLoachedEvent;
 		}
 
+		private void ImageLoachedEvent(object sender, ImageLoadedEventArgs e)
+		{
+			if (e.LoadedUrl == CurrentUser.ImageUrl)
+			{
+					OnPropertyChanged("CurrentUser");
+			}
+		}
+
+		#region Properites
 
 		#region ViewState
-		protected ProfileViewState _ViewState = ProfileViewState.Authorize;
+		protected ProfileViewState _ViewState = ProfileViewState.RequestToken;
 		public ProfileViewState ViewState
 		{
 			get
@@ -67,6 +82,18 @@ namespace Spillway.ViewModels
 		}
 		#endregion //Token
 
+
+		public User CurrentUser
+		{
+			get
+			{
+				return dataManager.CurrentUser;
+			}
+		}
+
+		#endregion //Propeties
+
+		#region Commands
 
 		#region SubmitTokenUrl
 		protected ICommand _SubmitTokenUrl = null;
@@ -134,6 +161,16 @@ namespace Spillway.ViewModels
 			}
 		}
 		#endregion //AuthorizeApplication
+
+		#endregion //Commands
+
+		#region Event Handlers
+		private void DataManager_UserChangedEvent(object sender, EventArgs e)
+		{
+			//tunnel the changed event to the view
+			OnPropertyChanged("CurrentUser");
+		}
+		#endregion // Event Handlers
 
 		#region ISection Properties
 		public override string ToString()

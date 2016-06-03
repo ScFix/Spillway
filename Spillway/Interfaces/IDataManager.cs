@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spillway.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,14 @@ namespace Spillway.Interfaces
 	/// </summary>
 	public interface IDataManager
 	{
+
+		User CurrentUser { get; set; }
+
 		bool RequestUserVerification();
 		bool HasCurrentSessionOpen();
 		void SetToken(string accessToken);
+
+		event EventHandler UserChangedEvent;
+
 	}
 }

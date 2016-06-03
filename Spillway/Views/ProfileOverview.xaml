@@ -5,13 +5,37 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:vm="clr-namespace:Spillway.ViewModels"
 			 xmlns:local="clr-namespace:Spillway.Views"
+			 xmlns:utilConv="clr-namespace:Spillway.Utilities.Converters;assembly=Spillway.Utilities"
 			 mc:Ignorable="d"
 			 d:DesignHeight="300"
 			 d:DesignWidth="300"
 			 d:DataContext="{d:DesignInstance Type=vm:ProfileViewModel, IsDesignTimeCreatable=True}">
+	<UserControl.Resources>
+		<utilConv:UrlImageConverter x:Key="ImageFromUrl" />
+	</UserControl.Resources>
 	<Grid HorizontalAlignment="Stretch"
 		  VerticalAlignment="Stretch">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition />
+			<ColumnDefinition />
+		</Grid.ColumnDefinitions>
+
 		<Label VerticalAlignment="Center"
-			   HorizontalAlignment="Center">Profile Overview</Label>
+			   HorizontalAlignment="Center"
+			   Grid.ColumnSpan="2">Profile Overview</Label>
+		<Image Grid.Row="1"
+			   Source="{Binding CurrentUser.ImageUrl, Converter={StaticResource ImageFromUrl}}" />
+
+		<StackPanel Grid.Row="1"
+					Grid.Column="1">
+			<Label Content="{Binding CurrentUser.Name}" />
+			<Label Content="{Binding CurrentUser.Reputation}" />
+
+		</StackPanel>
+
 	</Grid>
 </UserControl>

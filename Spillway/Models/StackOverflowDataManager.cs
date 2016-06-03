@@ -1,4 +1,5 @@
-﻿using Spillway.Interfaces;
+﻿using RestSharp;
+using Spillway.Interfaces;
 using Spillway.Utilities;
 //using Spillway.Data.OAuth;
 using System;
@@ -13,16 +14,29 @@ namespace Spillway.Models
 
 	public class StackOverflowDataManager : IDataManager
 	{
+		#region Members
 		// This Should be passed into via client_id 
 		private const string _clientId = "7246";
 		private const string _scope = "read_inbox,no_expiry,write_access,private_info";
 		private const string _redirectUrl = "https://stackexchange.com/oauth/login_success ";
 		private const string _accessUrl = "https://stackexchange.com/oauth/dialog";
 		private const string _requestKey = "TKxyoBaKAvQJy*kNpSXOiA((";
+		private const string _baseUrl = "https://api.stackexchange.com";
 		private string AccessToken;
+		#endregion //Members
 
+		#region Properties
+		public User CurrentUser { get; set; }
+		#endregion //Properties
 
+		#region Events
 
+		//public delegate void UserChangedHandler(object sender, EventArgs e);
+		public event EventHandler UserChangedEvent;
+
+		#endregion //Events
+
+		#region Methods
 		public bool HasCurrentSessionOpen()
 		{
 			//the most basic of validation, see if there is a stored token
@@ -47,6 +61,30 @@ namespace Spillway.Models
 		public void SetToken(string accessToken)
 		{
 			AccessToken = accessToken;
+			GetUserInfo();
 		}
+
+		public void GetUserInfo()
+		{
+			var client = new RestClient(_baseUrl);
+
+
+			var request = new RestRequest("/2.2/me");
+			request.AddParameter("order", "desc");
+			request.AddParameter("sort", "reputation");
+			request.AddParameter("site", "stackoverflow");
+			request.AddParameter("filter", "!0Z-Lvgpjwf2JywjvDYD7ipJc3");
+			request.AddParameter("access_token", AccessToken);
+			request.AddParameter("key", _requestKey);
+
+			var asyncHandle = client.ExecuteAsync<Users>(request, response =>
+			{
+				Trace.WriteLine(response.Data.Items[0]);
+
+				CurrentUser = response.Data.Items[0];
+				UserChangedEvent(this, EventArgs.Empty);
+			});
+		}
+		#endregion //Methods
 	}
 }
