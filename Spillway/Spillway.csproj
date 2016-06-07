@@ -146,9 +146,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\loading_anim.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Spillway.Contracts\Spillway.Contracts.csproj">
       <Project>{0a69a7a1-c59f-406f-9464-3e9eca2eb35c}</Project>
       <Name>Spillway.Contracts</Name>
