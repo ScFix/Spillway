@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Spillway.Contracts
 {
-	public class INotification
+	public interface INotification
 	{
 		
 	}

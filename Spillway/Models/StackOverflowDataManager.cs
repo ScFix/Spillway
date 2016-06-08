@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Spillway.Contracts;
 
 namespace Spillway.Models
 {
@@ -84,6 +85,11 @@ namespace Spillway.Models
 				CurrentUser = response.Data.Items[0];
 				UserChangedEvent(this, EventArgs.Empty);
 			});
+		}
+
+		public IList<INotification> RequestNotifications(IOptions options)
+		{
+			return null;
 		}
 		#endregion //Methods
 	}

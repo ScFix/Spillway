@@ -17,10 +17,6 @@ namespace Spillway.ViewModels
 			{
 				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-			else
-			{
-				throw new Exception();
-			}
 		}
 	}
 }

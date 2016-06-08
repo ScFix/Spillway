@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Spillway.Contracts
 {
-	public interface ILogin
+	public interface IOptions
 	{
+		
 	}
 }

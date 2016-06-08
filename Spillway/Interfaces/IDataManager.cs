@@ -1,4 +1,5 @@
-﻿using Spillway.Models;
+﻿using Spillway.Contracts;
+using Spillway.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace Spillway.Interfaces
 		bool HasCurrentSessionOpen();
 		void SetToken(string accessToken);
 
+		IList<INotification> RequestNotifications(IOptions options);
+		
 		event EventHandler UserChangedEvent;
 
 	}

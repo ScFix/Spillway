@@ -14,9 +14,6 @@
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Window.Resources>
-	<Window.DataContext>
-		<vm:MainViewModel />
-	</Window.DataContext>
 	<Grid Style="{DynamicResource baseBackgroundColor}">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />

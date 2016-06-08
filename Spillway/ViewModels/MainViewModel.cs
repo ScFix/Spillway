@@ -29,7 +29,7 @@ namespace Spillway.ViewModels
 
 
 		//This will need to be renamed for in hte end
-		private IList<ISection> _Settings;
+		private IList<ISection> _Settings = new List<ISection>();
 
 		public IList<ISection> Settings
 		{
@@ -57,10 +57,10 @@ namespace Spillway.ViewModels
 
 		public MainViewModel()
 		{
-			_Settings = new List<ISection>();
-			_Settings.Add(new ProfileViewModel());
-			_Settings.Add(new OptionsViewModel());
-			_SelectedTab = _Settings.First();
+			//_Settings = new List<ISection>();
+			//_Settings.Add(new ProfileViewModel());
+			//_Settings.Add(new OptionsViewModel());
+			//_SelectedTab = _Settings.First();
 		}
 
 	}

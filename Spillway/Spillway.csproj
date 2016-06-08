@@ -61,6 +61,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Interfaces\IDataManager.cs" />
+    <Compile Include="Interfaces\INotification.cs" />
+    <Compile Include="Interfaces\IOptions.cs" />
     <Compile Include="Interfaces\IProfile.cs" />
     <Compile Include="Interfaces\ISection.cs" />
     <Compile Include="Models\StackOverflowDataManager.cs" />
@@ -150,10 +152,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Spillway.Contracts\Spillway.Contracts.csproj">
-      <Project>{0a69a7a1-c59f-406f-9464-3e9eca2eb35c}</Project>
-      <Name>Spillway.Contracts</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Spillway.Utilities\Spillway.Utilities.csproj">
       <Project>{be108b7d-71a8-4282-b639-5adc3b4b7b0b}</Project>
       <Name>Spillway.Utilities</Name>
