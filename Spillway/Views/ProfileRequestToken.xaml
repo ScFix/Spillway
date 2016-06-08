@@ -9,11 +9,14 @@
 			 d:DesignHeight="300"
 			 d:DesignWidth="300"
 			 d:DataContext="{d:DesignInstance Type=vm:ProfileViewModel, IsDesignTimeCreatable=True}">
+	<UserControl.Resources>
+		<!--<ResourceDictionary Source="/Spillway;component/Resources/DataTemplates.xaml" />-->
+	</UserControl.Resources>
 	<Grid HorizontalAlignment="Stretch"
 		  VerticalAlignment="Stretch">
 		<StackPanel VerticalAlignment="Center">
-			<Label FontSize="20">Instructions</Label>
-			<TextBlock> After you authorize the application please copy and paste the url into the box below submit the url for verification.</TextBlock>
+			<Label>Instructions</Label>
+			<TextBlock > After you authorize the application please copy and paste the url into the box below submit the url for verification.</TextBlock>
 			<TextBox Text="{Binding TokenUrl, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 			<Button Command="{Binding SubmitTokenUrl}">Submit</Button>
 		</StackPanel>

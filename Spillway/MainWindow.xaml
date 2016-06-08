@@ -17,7 +17,7 @@
 	<Window.DataContext>
 		<vm:MainViewModel />
 	</Window.DataContext>
-	<Grid Style="{StaticResource baseBackgroundColor}">
+	<Grid Style="{DynamicResource baseBackgroundColor}">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
@@ -34,7 +34,7 @@
 		<Label Content="{Binding ProjectName}"
 			   Grid.Row="0"
 			   Grid.Column="0"
-			   Style="{StaticResource TitleLabel}" />
+			   Style="{DynamicResource TitleLabel}" />
 		<StackPanel Grid.Row="0"
 					Grid.Column="1"
 					HorizontalAlignment="Right"

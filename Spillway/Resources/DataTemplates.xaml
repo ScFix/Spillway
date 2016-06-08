@@ -6,53 +6,7 @@
 	<DataTemplate DataType="{x:Type vm:ProfileViewModel}">
 		<v:ProfileView ViewState="{Binding ViewState}" />
 	</DataTemplate>
+
+
 	
-
-	<!--Overriding System defaults for colors-->
-	<SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"
-					 Color="#25363c" />
-	<SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}"
-					 Color="#25363c" />
-
-	<!--Overrides for default styles-->
-	<Style TargetType="Grid">
-		<Setter Property="Background"
-				Value="Transparent" />
-	</Style>
-	<Style TargetType="ListBox">
-		<Setter Property="Background"
-				Value="Transparent" />
-	</Style>
-	<Style TargetType="StackPanel">
-		<Setter Property="Background"
-				Value="Transparent" />
-	</Style>
-
-	<Style TargetType="{x:Type TextBlock}">
-		<Setter Property="Foreground"
-				Value="#e9eaeb" />
-	</Style>
-	<Style TargetType="{x:Type Label}">
-		<Setter Property="Foreground"
-				Value="#e9eaeb" />
-	</Style>
-
-
-	<!--General purpose styles-->
-
-	<Style TargetType="Label"
-		   x:Key="TitleLabel"
-		   BasedOn="{StaticResource {x:Type Label}}">
-		<Setter Property="FontStyle"
-				Value="Normal" />
-		<Setter Property="FontFamily"
-				Value="Arial" />
-		<Setter Property="FontSize"
-				Value="32" />
-	</Style>
-	<Style TargetType="Grid"
-		   x:Key="baseBackgroundColor">
-		<Setter Property="Background"
-				Value="#333333" />
-	</Style>
 </ResourceDictionary>
