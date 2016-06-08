@@ -84,6 +84,9 @@ namespace Spillway.Models
 
 				CurrentUser = response.Data.Items[0];
 				UserChangedEvent(this, EventArgs.Empty);
+
+				Spillway.Properties.Settings.Default.Access_Token = this.AccessToken;
+				Spillway.Properties.Settings.Default.Save();
 			});
 		}
 

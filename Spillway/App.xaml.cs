@@ -1,4 +1,5 @@
-﻿using Spillway.ViewModels;
+﻿using Spillway.Models;
+using Spillway.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -20,8 +21,18 @@ namespace Spillway
 			//Interaction logic for all known connections as well as all other started features
 
 			MainViewModel mainViewModel = new MainViewModel();
-			var profileViewModel = new ProfileViewModel();
+			var dataManager = new StackOverflowDataManager();
+
+
+
+		
+
+			var profileViewModel = new ProfileViewModel(dataManager);
 			var optionsViewModel = new OptionsViewModel();
+
+			var token = Spillway.Properties.Settings.Default.Access_Token;
+			if (!String.IsNullOrEmpty(token))
+				dataManager.SetToken(token);
 
 			mainViewModel.Settings.Add(profileViewModel);
 			mainViewModel.Settings.Add(new OptionsViewModel());

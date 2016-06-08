@@ -27,10 +27,10 @@ namespace Spillway.ViewModels
 
 		#endregion //Members
 
-		public ProfileViewModel()
+		public ProfileViewModel(IDataManager dataManager)
 		{
-			dataManager = new StackOverflowDataManager();
-			dataManager.UserChangedEvent += DataManager_UserChangedEvent;
+			this.dataManager = dataManager;
+			this.dataManager.UserChangedEvent += DataManager_UserChangedEvent;
 			ImageCache.ImageLoaded += ImageLoachedEvent;
 		}
 
@@ -38,14 +38,14 @@ namespace Spillway.ViewModels
 		{
 			if (e.LoadedUrl == CurrentUser.ImageUrl)
 			{
-					OnPropertyChanged("CurrentUser");
+				OnPropertyChanged("CurrentUser");
 			}
 		}
 
 		#region Properites
 
 		#region ViewState
-		protected ProfileViewState _ViewState = ProfileViewState.RequestToken;
+		protected ProfileViewState _ViewState = ProfileViewState.Authorize;
 		public ProfileViewState ViewState
 		{
 			get
@@ -81,6 +81,7 @@ namespace Spillway.ViewModels
 			}
 		}
 		#endregion //Token
+
 
 
 		public User CurrentUser
@@ -167,6 +168,7 @@ namespace Spillway.ViewModels
 		#region Event Handlers
 		private void DataManager_UserChangedEvent(object sender, EventArgs e)
 		{
+			ViewState = ProfileViewState.CurrentProfile;
 			//tunnel the changed event to the view
 			OnPropertyChanged("CurrentUser");
 		}
