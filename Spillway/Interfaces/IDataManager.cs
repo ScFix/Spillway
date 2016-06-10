@@ -19,9 +19,9 @@ namespace Spillway.Interfaces
 		bool RequestUserVerification();
 		bool HasCurrentSessionOpen();
 		void SetToken(string accessToken);
+		void StartNotificationFetching();
+		IList<INotification> RequestUnreadNotifications(IOptions options);
 
-		IList<INotification> RequestNotifications(IOptions options);
-		
 		event EventHandler UserChangedEvent;
 
 	}

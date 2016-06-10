@@ -28,6 +28,9 @@ namespace Spillway.Models
 
 		#region Properties
 		public User CurrentUser { get; set; }
+
+		private IList<INotification> _UnreadNotifications = new List<INotification>();
+		public IList<INotification> UnreadNotifications { get; set; }
 		#endregion //Properties
 
 		#region Events
@@ -90,9 +93,33 @@ namespace Spillway.Models
 			});
 		}
 
-		public IList<INotification> RequestNotifications(IOptions options)
+		public IList<INotification> RequestUnreadNotifications(IOptions options)
 		{
+			var client = new RestClient(_baseUrl);
+
+
+			var request = new RestRequest("/2.2/users/" + CurrentUser.Id + "/notifications/unread");
+			//this will eventually have to be expanded to encompass other sites
+			request.AddParameter("site", "stackoverflow");
+			request.AddParameter("access_token", AccessToken);
+			request.AddParameter("key", _requestKey);
+
+			var asyncHandle = client.ExecuteAsync<Users>(request, response =>
+			{
+				Trace.WriteLine(response.Data.Items[0]);
+
+				CurrentUser = response.Data.Items[0];
+				UserChangedEvent(this, EventArgs.Empty);
+
+				Spillway.Properties.Settings.Default.Access_Token = this.AccessToken;
+				Spillway.Properties.Settings.Default.Save();
+			});
 			return null;
+		}
+
+		public void StartNotificationFetching()
+		{
+			//Start the thread that will fetch all of the unread messages
 		}
 		#endregion //Methods
 	}

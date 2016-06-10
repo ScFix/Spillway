@@ -199,6 +199,11 @@ namespace Spillway.ViewModels
 			ViewState = ProfileViewState.RequestToken;
 		}
 
+		public void StartNotificationUpdate()
+		{
+			throw new NotImplementedException();
+		}
+
 		#endregion //IProfile Implementation
 	}
 }
