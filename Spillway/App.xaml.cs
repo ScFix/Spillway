@@ -25,17 +25,23 @@ namespace Spillway
 
 
 
-		
+
 
 			var profileViewModel = new ProfileViewModel(dataManager);
 			var optionsViewModel = new OptionsViewModel();
+
 
 			var token = Spillway.Properties.Settings.Default.Access_Token;
 			if (!String.IsNullOrEmpty(token))
 				dataManager.SetToken(token);
 
 			mainViewModel.Settings.Add(profileViewModel);
-			mainViewModel.Settings.Add(new OptionsViewModel());
+			mainViewModel.Settings.Add(optionsViewModel);
+
+#if DEBUG
+			var debugPanel = new DebugViewModel();
+			mainViewModel.Settings.Add(debugPanel);
+#endif
 
 			mainViewModel.SelectedTab = profileViewModel;
 
