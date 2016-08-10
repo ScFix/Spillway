@@ -34,10 +34,9 @@ namespace Spillway.Models
 		#endregion //Properties
 
 		#region Events
-
 		//public delegate void UserChangedHandler(object sender, EventArgs e);
 		public event EventHandler UserChangedEvent;
-
+		public event StackNotifyHandler IncomingNotificationsEvent;
 		#endregion //Events
 
 		#region Methods
@@ -86,7 +85,8 @@ namespace Spillway.Models
 				Trace.WriteLine(response.Data.Items[0]);
 
 				CurrentUser = response.Data.Items[0];
-				UserChangedEvent(this, EventArgs.Empty);
+				// check to make sure someone has subscribed to this.
+				UserChangedEvent?.Invoke(this, EventArgs.Empty);
 
 				Spillway.Properties.Settings.Default.Access_Token = this.AccessToken;
 				Spillway.Properties.Settings.Default.Save();
@@ -121,6 +121,13 @@ namespace Spillway.Models
 		{
 			//Start the thread that will fetch all of the unread messages
 		}
+
+		private void RaiseIncomingNotifications(IList<StackNotification> notifications)
+		{
+
+
+		}
 		#endregion //Methods
 	}
 }
+

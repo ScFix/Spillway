@@ -57,10 +57,6 @@ namespace Spillway.ViewModels
 
 		public MainViewModel()
 		{
-			//_Settings = new List<ISection>();
-			//_Settings.Add(new ProfileViewModel());
-			//_Settings.Add(new OptionsViewModel());
-			//_SelectedTab = _Settings.First();
 		}
 
 	}

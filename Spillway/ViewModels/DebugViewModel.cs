@@ -35,7 +35,7 @@ namespace Spillway.ViewModels
 		private void SendSampleToastExecute(object obj)
 		{
 			//TODO Implement the SendSampleToast Method
-			Debug.WriteLine("SendSampleToast Executed");
+			
 		}
 		#endregion //SendSampleToast
 

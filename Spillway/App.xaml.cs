@@ -20,20 +20,18 @@ namespace Spillway
 		{
 			//Interaction logic for all known connections as well as all other started features
 
-			MainViewModel mainViewModel = new MainViewModel();
+			var mainViewModel = new MainViewModel();
 			var dataManager = new StackOverflowDataManager();
-
-
-
-
-
 			var profileViewModel = new ProfileViewModel(dataManager);
 			var optionsViewModel = new OptionsViewModel();
 
-
+			
+			// NOTE(Matthew): this will start the call for seeing if the token is actually valid. 
 			var token = Spillway.Properties.Settings.Default.Access_Token;
 			if (!String.IsNullOrEmpty(token))
+			{
 				dataManager.SetToken(token);
+			}
 
 			mainViewModel.Settings.Add(profileViewModel);
 			mainViewModel.Settings.Add(optionsViewModel);
