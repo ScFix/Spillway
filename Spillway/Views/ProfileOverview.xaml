@@ -15,12 +15,20 @@
 	</UserControl.Resources>
 	<Grid HorizontalAlignment="Stretch"
 		  VerticalAlignment="Stretch">
+		<Grid.Resources>
+			<Style TargetType="Ellipse">
+				<Setter Property="Height"
+						Value="10" />
+				<Setter Property="Width"
+						Value="10" />
+			</Style>
+		</Grid.Resources>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition />
+			<ColumnDefinition Width="Auto" />
 			<ColumnDefinition />
 		</Grid.ColumnDefinitions>
 
@@ -28,13 +36,24 @@
 			   HorizontalAlignment="Center"
 			   Grid.ColumnSpan="2">Profile Overview</Label>
 		<Image Grid.Row="1"
-			   Source="{Binding CurrentUser.ImageUrl, Converter={StaticResource ImageFromUrl}}" />
+			   Source="{Binding CurrentUser.ImageUrl, Converter={StaticResource ImageFromUrl}}"
+			   VerticalAlignment="Top"
+			   HorizontalAlignment="Center"
+			   MaxWidth="200"
+			   Margin="20,0,20,0" />
 
 		<StackPanel Grid.Row="1"
 					Grid.Column="1">
 			<Label Content="{Binding CurrentUser.Name}" />
 			<Label Content="{Binding CurrentUser.Reputation}" />
-
+			<StackPanel Orientation="Horizontal">
+				<Ellipse Fill="#FFCC00" />
+				<Label Content="{Binding CurrentUser.Badges.Gold}" />
+				<Ellipse Fill="#C5C5C5" />
+				<Label Content="{Binding CurrentUser.Badges.Silver}" />
+				<Ellipse Fill="#C3874B" />
+				<Label Content="{Binding CurrentUser.Badges.Bronze}" />
+			</StackPanel>
 		</StackPanel>
 
 	</Grid>

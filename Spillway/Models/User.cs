@@ -12,6 +12,11 @@ namespace Spillway.Models
 	[DataContract()]
 	public class User
 	{
+
+
+		[DeserializeAs(Name = "badge_counts")]
+		public ReputationBadges Badges { get; set; }
+
 		[DeserializeAs(Name = "reputation")]
 		public int Reputation
 		{

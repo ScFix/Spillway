@@ -74,7 +74,7 @@ namespace Spillway.Models
 			request.AddParameter("order", "desc");
 			request.AddParameter("sort", "reputation");
 			request.AddParameter("site", "stackoverflow");
-			request.AddParameter("filter", "!0Z-Lvgpjwf2JywjvDYD7ipJc3");
+			request.AddParameter("filter", "!40DJoyoFxZjgBkP1(");
 			request.AddParameter("access_token", AccessToken);
 			request.AddParameter("key", _requestKey);
 

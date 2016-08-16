@@ -90,6 +90,7 @@
     <Compile Include="Interfaces\IProfile.cs" />
     <Compile Include="Interfaces\ISection.cs" />
     <Compile Include="Models\Notification.cs" />
+    <Compile Include="Models\ReputationBadges.cs" />
     <Compile Include="Models\StackNotification.cs" />
     <Compile Include="Models\StackOverflowDataManager.cs" />
     <Compile Include="Models\ToastManager.cs" />

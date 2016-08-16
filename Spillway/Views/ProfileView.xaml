@@ -32,6 +32,7 @@
 		</Grid.RowDefinitions>
 		<Label HorizontalAlignment="Center"
 			   VerticalAlignment="Top"
+			   FontSize="20"
 			   Content="{Binding SectionName}" />
 		<ContentControl Content="{Binding}"
 						Grid.Row="1"
