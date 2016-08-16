@@ -21,6 +21,14 @@ namespace Spillway.Models
 			TryCreateShortcut();
 		}
 
+		internal void PostNotifications(object sender, StackArgs e)
+		{
+			foreach (var notification in e.Notifications)
+			{
+				ShowToast(notification);
+			}
+		}
+
 		/// <summary>
 		/// This is where the magic happens, mostly concerning the windows api. The link sends you to the project that I ripped this code from. Need to really isolaet it
 		/// from the toast manager it does me no favors existing in its current form but it is currently working. 
@@ -64,23 +72,28 @@ namespace Spillway.Models
 			ErrorHelper.VerifySucceeded(newShortcutSave.Save(shortcutPath, true));
 		}
 
-		public void ShowToast(INotification notificaation)
+		public void ShowToast(INotification notification)
 		{
 			XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastImageAndText04);
 
 			// Fill in the text elements
 			XmlNodeList stringElements = toastXml.GetElementsByTagName("text");
-			for (int i = 0; i < stringElements.Length; i++)
-			{
-				stringElements[i].AppendChild(toastXml.CreateTextNode("Line " + i));
-			}
+			stringElements[0].AppendChild(toastXml.CreateTextNode(notification.Type));
+			var dt = DateUtil.FromUnixTime(notification.Date);
+			stringElements[1].AppendChild(toastXml.CreateTextNode(dt.ToLongDateString()));
+
+
+			//for (int i = 0; i < stringElements.Length; i++)
+			//{
+			//	stringElements[i].AppendChild(toastXml.CreateTextNode("Line " + i));
+			//}
 
 			// Specify the absolute path to an image
 			String imagePath = "file:///" + Environment.CurrentDirectory + @"\Resources\Images\so-icon.png";
 			XmlNodeList imageElements = toastXml.GetElementsByTagName("image");
 			imageElements[0].Attributes.GetNamedItem("src").NodeValue = imagePath;
 
-			string paramString = "http:\\google.com";
+			string paramString = notification.Link;
 			((XmlElement)toastXml.SelectSingleNode("/toast")).SetAttribute("launch", paramString);
 
 			// Create the toast and attach event listeners

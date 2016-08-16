@@ -15,6 +15,25 @@ namespace Spillway.ViewModels
 	public class DebugViewModel : ViewModelBase, ISection
 	{
 
+		#region DataManager
+		protected IDataManager _DataManager;
+		public IDataManager DataManager
+		{
+			get
+			{
+				return _DataManager;
+			}
+			set
+			{
+				if (value != _DataManager)
+				{
+					_DataManager = value;
+					OnPropertyChanged("DataManager");
+				}
+			}
+		}
+		#endregion //DataManager
+
 		#region Toasts
 		protected ToastManager _Toasts;
 		public ToastManager Toasts
@@ -58,6 +77,32 @@ namespace Spillway.ViewModels
 			Toasts.ShowToast(null);
 		}
 		#endregion //SendSampleToast
+
+
+		#region RequestSampleData
+		protected ICommand _RequestSampleData = null;
+		public ICommand RequestSampleData
+		{
+			get
+			{
+				if (_RequestSampleData == null)
+				{
+					_RequestSampleData = new RelayCommand(RequestSampleDataExecute, CanRequestSampleData);
+				}
+				return _RequestSampleData;
+			}
+		}
+
+		private bool CanRequestSampleData(object obj)
+		{
+			return true;
+		}
+
+		private void RequestSampleDataExecute(object obj)
+		{
+			DataManager.RequestUnreadNotifications(null);
+		}
+		#endregion //RequestSampleData
 
 		public string SectionName
 		{

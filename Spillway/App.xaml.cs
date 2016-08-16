@@ -23,6 +23,9 @@ namespace Spillway
 			var mainViewModel = new MainViewModel();
 			var dataManager = new StackOverflowDataManager();
 			var toastManager = new ToastManager();
+
+			dataManager.IncomingNotificationsEvent += toastManager.PostNotifications;
+
 			var profileViewModel = new ProfileViewModel(dataManager);
 			var optionsViewModel = new OptionsViewModel();
 
@@ -40,6 +43,7 @@ namespace Spillway
 #if DEBUG
 			var debugPanel = new DebugViewModel();
 			debugPanel.Toasts = toastManager;
+			debugPanel.DataManager = dataManager;
 			mainViewModel.Settings.Add(debugPanel);
 #endif
 

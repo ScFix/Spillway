@@ -9,11 +9,18 @@
 			 d:DesignHeight="300"
 			 d:DesignWidth="300"
 			 d:DataContext="{d:DesignInstance Type=vm:DebugViewModel, IsDesignTimeCreatable=True}">
-	<Grid>
+	<StackPanel>
+		<Button Command="{Binding RequestSampleData}"
+				Width="100"
+				Height="80"
+				Margin="10">
+			Request Sample Data
+		</Button>
 		<Button Command="{Binding SendSampleToast}"
 				Width="100"
-				Height="80">
+				Height="80"
+				Margin="10">
 			Send Notifcation
 		</Button>
-	</Grid>
+	</StackPanel>
 </UserControl>

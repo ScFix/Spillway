@@ -115,25 +115,26 @@ namespace Spillway.Models
 
 		public IList<INotification> RequestUnreadNotifications(IOptions options)
 		{
-			var client = new RestClient(_baseUrl);
-
-
-			var request = new RestRequest("/2.2/users/" + CurrentUser.Id + "/notifications/unread");
-			//this will eventually have to be expanded to encompass other sites
-			request.AddParameter("site", "stackoverflow");
+			var request = new RestRequest("/2.2/inbox");
+			//request.AddParameter("site", "stackoverflow");
+			request.AddParameter("filter", "!*L6Kz8C2J(yJQxNo");
 			request.AddParameter("access_token", AccessToken);
 			request.AddParameter("key", _requestKey);
-
-			var asyncHandle = client.ExecuteAsync<Users>(request, response =>
+			// Todo(Matthew): finish this response
+			var asyncHandle = client.ExecuteAsync<UnreadMail>(request, response =>
 			{
-				Trace.WriteLine(response.Data.Items[0]);
+				//Trace.WriteLine(response.Data.Items[0]);
 
-				CurrentUser = response.Data.Items[0];
-				UserChangedEvent(this, EventArgs.Empty);
-
-				Spillway.Properties.Settings.Default.Access_Token = this.AccessToken;
-				Spillway.Properties.Settings.Default.Save();
+				var mail = response.Data;
+				mail.Items.ForEach((notification) =>
+				{
+					Debug.WriteLine(notification.Link);
+				});
+				// check to make sure someone has subscribed to this.
+				//UserChangedEvent?.Invoke(this, EventArgs.Empty);
+				IncomingNotificationsEvent?.Invoke(this, new StackArgs() { Notifications = (List<Notification>)mail.Items });
 			});
+
 			return null;
 		}
 
@@ -142,11 +143,6 @@ namespace Spillway.Models
 			//Start the thread that will fetch all of the unread messages
 		}
 
-		private void RaiseIncomingNotifications(IList<StackNotification> notifications)
-		{
-
-
-		}
 		#endregion //Methods
 	}
 }

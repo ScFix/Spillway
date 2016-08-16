@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="AttachedProperties\DataTemplateParameters.cs" />
     <Compile Include="Converters\UrlImageConverter.cs" />
+    <Compile Include="DateUtil.cs" />
     <Compile Include="ImageCache.cs" />
     <Compile Include="OAuth.cs" />
     <Compile Include="RelayCommand.cs" />

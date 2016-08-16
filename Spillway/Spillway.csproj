@@ -89,9 +89,11 @@
     <Compile Include="Interfaces\IOptions.cs" />
     <Compile Include="Interfaces\IProfile.cs" />
     <Compile Include="Interfaces\ISection.cs" />
+    <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\StackNotification.cs" />
     <Compile Include="Models\StackOverflowDataManager.cs" />
     <Compile Include="Models\ToastManager.cs" />
+    <Compile Include="Models\UnreadMail.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="TemplateSelectors\ProfileViewTemplateSelector.cs" />

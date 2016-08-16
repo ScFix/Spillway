@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spillway.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,11 +11,7 @@ namespace Spillway.Models
 
 	public class StackArgs : EventArgs
 	{
-		public IList<StackNotification> Notifications { get; set; }
+		public List<Notification> Notifications { get; set; }
 	}
 
-	public class StackNotification
-	{
-
-	}
 }
