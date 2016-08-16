@@ -8,6 +8,7 @@ using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
 using Windows.UI.Notifications;
 using Windows.Data.Xml.Dom;
 using Spillway.Contracts;
+using System.Reflection;
 
 namespace Spillway.Models
 {
@@ -79,6 +80,9 @@ namespace Spillway.Models
 			XmlNodeList imageElements = toastXml.GetElementsByTagName("image");
 			imageElements[0].Attributes.GetNamedItem("src").NodeValue = imagePath;
 
+			string paramString = "http:\\google.com";
+			((XmlElement)toastXml.SelectSingleNode("/toast")).SetAttribute("launch", paramString);
+
 			// Create the toast and attach event listeners
 			ToastNotification toast = new ToastNotification(toastXml);
 			toast.Activated += ToastActivated;
@@ -102,6 +106,15 @@ namespace Spillway.Models
 		private void ToastActivated(ToastNotification sender, object args)
 		{
 			Console.WriteLine("Toast Activated");
+			try
+			{
+				String s = (String)(args.GetType().GetProperty("Arguments").GetValue(args, null));
+				Process.Start(s);
+			}
+			catch (Exception)
+			{
+				Console.WriteLine("Error!");
+			}
 		}
 	}
 }

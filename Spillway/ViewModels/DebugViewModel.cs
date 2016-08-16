@@ -55,7 +55,7 @@ namespace Spillway.ViewModels
 
 		private void SendSampleToastExecute(object obj)
 		{
-			Toasts.ShowToast();
+			Toasts.ShowToast(null);
 		}
 		#endregion //SendSampleToast
 
