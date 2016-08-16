@@ -22,10 +22,11 @@ namespace Spillway
 
 			var mainViewModel = new MainViewModel();
 			var dataManager = new StackOverflowDataManager();
+			var toastManager = new ToastManager();
 			var profileViewModel = new ProfileViewModel(dataManager);
 			var optionsViewModel = new OptionsViewModel();
 
-			
+
 			// NOTE(Matthew): this will start the call for seeing if the token is actually valid. 
 			var token = Spillway.Properties.Settings.Default.Access_Token;
 			if (!String.IsNullOrEmpty(token))
@@ -38,6 +39,7 @@ namespace Spillway
 
 #if DEBUG
 			var debugPanel = new DebugViewModel();
+			debugPanel.Toasts = toastManager;
 			mainViewModel.Settings.Add(debugPanel);
 #endif
 

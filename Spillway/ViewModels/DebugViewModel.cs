@@ -1,4 +1,5 @@
 ﻿using Spillway.Interfaces;
+using Spillway.Models;
 using Spillway.Utilities;
 using System;
 using System.Collections.Generic;
@@ -7,11 +8,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Xml;
 
 namespace Spillway.ViewModels
 {
 	public class DebugViewModel : ViewModelBase, ISection
 	{
+
+		#region Toasts
+		protected ToastManager _Toasts;
+		public ToastManager Toasts
+		{
+			get
+			{
+				return _Toasts;
+			}
+			set
+			{
+				if (value != _Toasts)
+				{
+					_Toasts = value;
+					OnPropertyChanged("Toasts");
+				}
+			}
+		}
+		#endregion //Toasts
 
 		#region SendSampleToast
 		protected ICommand _SendSampleToast = null;
@@ -34,8 +55,7 @@ namespace Spillway.ViewModels
 
 		private void SendSampleToastExecute(object obj)
 		{
-			//TODO Implement the SendSampleToast Method
-			
+			Toasts.ShowToast();
 		}
 		#endregion //SendSampleToast
 
@@ -46,6 +66,7 @@ namespace Spillway.ViewModels
 				return "Debug Panel";
 			}
 		}
+
 
 	}
 }
