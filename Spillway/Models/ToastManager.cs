@@ -7,6 +7,7 @@ using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
 
 using Windows.UI.Notifications;
 using Windows.Data.Xml.Dom;
+using Spillway.Contracts;
 
 namespace Spillway.Models
 {
@@ -19,9 +20,15 @@ namespace Spillway.Models
 			TryCreateShortcut();
 		}
 
-
+		/// <summary>
+		/// This is where the magic happens, mostly concerning the windows api. The link sends you to the project that I ripped this code from. Need to really isolaet it
+		/// from the toast manager it does me no favors existing in its current form but it is currently working. 
+		/// </summary>
+		/// <see cref="https://code.msdn.microsoft.com/windowsdesktop/sending-toast-notifications-71e230a2"/>
+		/// <returns></returns>
 		private bool TryCreateShortcut()
 		{
+			//Don't like these static links
 			String shortcutPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Windows\\Start Menu\\Programs\\Spillway.lnk";
 			if (!File.Exists(shortcutPath))
 			{
@@ -56,7 +63,7 @@ namespace Spillway.Models
 			ErrorHelper.VerifySucceeded(newShortcutSave.Save(shortcutPath, true));
 		}
 
-		public void ShowToast()
+		public void ShowToast(INotification notificaation)
 		{
 			XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastImageAndText04);
 
