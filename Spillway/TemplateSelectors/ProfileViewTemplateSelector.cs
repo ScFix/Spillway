@@ -22,14 +22,17 @@ namespace Spillway.TemplateSelectors
 			if (item != null)
 			{
 				var pvm = item as ProfileViewModel;
-				switch (pvm.ViewState)
+				if (pvm != null)
 				{
-					case ProfileViewState.Authorize:
-						return Authorize;
-					case ProfileViewState.RequestToken:
-						return RequestToken;
-					case ProfileViewState.CurrentProfile:
-						return CurrentProfile;
+					switch (pvm.ViewState)
+					{
+						case ProfileViewState.Authorize:
+							return Authorize;
+						case ProfileViewState.RequestToken:
+							return RequestToken;
+						case ProfileViewState.CurrentProfile:
+							return CurrentProfile;
+					}
 				}
 			}
 			return base.SelectTemplate(item, container);

@@ -27,6 +27,13 @@ namespace Spillway.ViewModels
 
 		#endregion //Members
 
+#if Debug
+		public ProfileViewModel()
+		{
+			
+		}
+#endif
+
 		public ProfileViewModel(IDataManager dataManager)
 		{
 			this.dataManager = dataManager;
