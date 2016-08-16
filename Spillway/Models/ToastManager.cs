@@ -76,7 +76,7 @@ namespace Spillway.Models
 			}
 
 			// Specify the absolute path to an image
-			String imagePath = "file:///" + Path.GetFullPath("toastImageAndText.png");
+			String imagePath = "file:///" + Environment.CurrentDirectory + @"\Resources\Images\so-icon.png";
 			XmlNodeList imageElements = toastXml.GetElementsByTagName("image");
 			imageElements[0].Attributes.GetNamedItem("src").NodeValue = imagePath;
 
