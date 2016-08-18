@@ -115,7 +115,7 @@ namespace Spillway.Models
 
 		public IList<INotification> RequestUnreadNotifications(IOptions options)
 		{
-			var request = new RestRequest("/2.2/inbox");
+			var request = new RestRequest("/2.2/inbox/unread");
 			//request.AddParameter("site", "stackoverflow");
 			request.AddParameter("filter", "!*L6Kz8C2J(yJQxNo");
 			request.AddParameter("access_token", AccessToken);
