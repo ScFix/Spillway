@@ -58,7 +58,7 @@ namespace Spillway
 			{
 				this.canClose = true;
 				this.Close();
-			}; 
+			};
 			menu.MenuItems.Add(closingMenuItem);
 
 			return menu;
@@ -76,11 +76,6 @@ namespace Spillway
 			}
 #endif
 		}
-
-		private void Window_StateChanged(object sender, EventArgs e)
-		{
-			if (WindowState == WindowState.Minimized) this.Hide();
-			base.OnStateChanged(e);
-		}
+		
 	}
 }
