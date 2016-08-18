@@ -65,7 +65,8 @@ namespace Spillway.Utilities
 		{
 			System.Windows.Threading.Dispatcher.CurrentDispatcher.InvokeAsync(() =>
 			{
-				ImageLoaded(null, new ImageLoadedEventArgs(e.Result.ToString()));
+				
+				ImageLoaded?.Invoke(null, new ImageLoadedEventArgs(e.Result.ToString()));
 			});
 		}
 
