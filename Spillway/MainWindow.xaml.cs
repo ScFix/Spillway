@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +22,55 @@ namespace Spillway
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		private bool canClose = false;
+
 		public MainWindow()
 		{
 			InitializeComponent();
+
+			System.Windows.Forms.NotifyIcon ni = new System.Windows.Forms.NotifyIcon();
+			//String imagePath = Environment.CurrentDirectory + @"\Resources\Images\spillway.png";
+			Bitmap bmp = Spillway.Properties.Resources.spillway;
+			ni.Icon = System.Drawing.Icon.FromHandle(bmp.GetHicon());
+			ni.Visible = true;
+			ni.DoubleClick +=
+				delegate (object sender, EventArgs args)
+				{
+					this.Show();
+					this.WindowState = System.Windows.WindowState.Normal;
+				};
+
+			System.Windows.Forms.ContextMenu menu = new System.Windows.Forms.ContextMenu();
+			System.Windows.Forms.MenuItem closingMeneItem = new System.Windows.Forms.MenuItem("Close");
+			closingMeneItem.Click += delegate (object sender, EventArgs args)
+			{
+				this.canClose = true;
+				this.Close();
+			}; ;
+
+			menu.MenuItems.Add(closingMeneItem);
+			ni.ContextMenu = menu;
+		}
+
+		
+
+		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+#if DEBUG
+			Trace.WriteLine("This should exit to the system tray");
+#else
+			if (!canClose)
+			{
+				e.Cancel = true;
+				this.Hide();
+			}
+#endif
+		}
+
+		private void Window_StateChanged(object sender, EventArgs e)
+		{
+			if (WindowState == WindowState.Minimized) this.Hide();
+			base.OnStateChanged(e);
 		}
 	}
 }

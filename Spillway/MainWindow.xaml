@@ -7,7 +7,9 @@
 		xmlns:vm="clr-namespace:Spillway.ViewModels"
 		mc:Ignorable="d"
 		Width="800"
-		Height="500"	
+		Height="500"
+		StateChanged="Window_StateChanged"
+		Closing="Window_Closing"
 		Title="Spillway">
 	<Window.Resources>
 		<ResourceDictionary>
