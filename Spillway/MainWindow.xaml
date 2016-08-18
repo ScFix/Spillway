@@ -6,6 +6,8 @@
 		xmlns:local="clr-namespace:Spillway"
 		xmlns:vm="clr-namespace:Spillway.ViewModels"
 		mc:Ignorable="d"
+		Width="800"
+		Height="500"	
 		Title="Spillway">
 	<Window.Resources>
 		<ResourceDictionary>
