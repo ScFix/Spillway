@@ -74,7 +74,12 @@ namespace Spillway.ViewModels
 
 		private void SendSampleToastExecute(object obj)
 		{
-			Toasts.ShowToast(null);
+			Notification n = new Notification();
+			n.Type = "EXAMPLE";
+			n.Date = 0;
+			n.Link = "http:\\google.com";
+
+			Toasts.ShowToast(n);
 		}
 		#endregion //SendSampleToast
 
