@@ -27,10 +27,16 @@ namespace Spillway
 		public MainWindow()
 		{
 			InitializeComponent();
+			SetupSytemTray();
+		}
 
+		private void SetupSytemTray()
+		{
+			//inserts this icon into the system tray of the OS. This will allow for the application to close from there
 			System.Windows.Forms.NotifyIcon ni = new System.Windows.Forms.NotifyIcon();
-			//String imagePath = Environment.CurrentDirectory + @"\Resources\Images\spillway.png";
+
 			Bitmap bmp = Spillway.Properties.Resources.spillway;
+
 			ni.Icon = System.Drawing.Icon.FromHandle(bmp.GetHicon());
 			ni.Visible = true;
 			ni.DoubleClick +=
@@ -40,6 +46,12 @@ namespace Spillway
 					this.WindowState = System.Windows.WindowState.Normal;
 				};
 
+			var menu = GetContextMenuForSystemTray();
+			ni.ContextMenu = menu;
+		}
+
+		private System.Windows.Forms.ContextMenu GetContextMenuForSystemTray()
+		{
 			System.Windows.Forms.ContextMenu menu = new System.Windows.Forms.ContextMenu();
 			System.Windows.Forms.MenuItem closingMeneItem = new System.Windows.Forms.MenuItem("Close");
 			closingMeneItem.Click += delegate (object sender, EventArgs args)
@@ -47,12 +59,8 @@ namespace Spillway
 				this.canClose = true;
 				this.Close();
 			}; ;
-
-			menu.MenuItems.Add(closingMeneItem);
-			ni.ContextMenu = menu;
+			return menu;
 		}
-
-		
 
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
