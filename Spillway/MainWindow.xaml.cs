@@ -53,12 +53,14 @@ namespace Spillway
 		private System.Windows.Forms.ContextMenu GetContextMenuForSystemTray()
 		{
 			System.Windows.Forms.ContextMenu menu = new System.Windows.Forms.ContextMenu();
-			System.Windows.Forms.MenuItem closingMeneItem = new System.Windows.Forms.MenuItem("Close");
-			closingMeneItem.Click += delegate (object sender, EventArgs args)
+			System.Windows.Forms.MenuItem closingMenuItem = new System.Windows.Forms.MenuItem("Close");
+			closingMenuItem.Click += delegate (object sender, EventArgs args)
 			{
 				this.canClose = true;
 				this.Close();
-			}; ;
+			}; 
+			menu.MenuItems.Add(closingMenuItem);
+
 			return menu;
 		}
 
