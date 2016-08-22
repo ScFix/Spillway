@@ -1,5 +1,6 @@
 ﻿using Spillway.Interfaces;
 using System.Collections.Generic;
+using Spillway.Services;
 
 namespace Spillway.ViewModels
 {
@@ -56,7 +57,12 @@ namespace Spillway.ViewModels
             }
         }
 
+
         #endregion SelectedTab
+
+        #region TimingService
+        public DataTimingService TimingService { get; set; }
+        #endregion// TimingService
 
         public MainViewModel()
         {
@@ -68,6 +74,7 @@ namespace Spillway.ViewModels
         /// </summary>
         internal void Close()
         {
+            TimingService?.CancelTimer();
         }
     }
 }

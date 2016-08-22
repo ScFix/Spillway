@@ -11,18 +11,19 @@ namespace Spillway.Services
         public const int lowestRefreshInterval = 300000; // lowest you can refresh is set to 5 minutes
         private int refreshPeriod = 0;
         private IDataService dataService = null;
-
+        private IOptions options = null;
         #endregion Members
 
         #region Constructors
 
-        public DataTimingService(IDataService dataService, IOptions options, int period = 0)
+        public DataTimingService(IDataService dataService, IOptions options = null, int refreshPeriod = 0)
         {
             this.dataService = dataService;
-            refreshPeriod = period;
+            this.options = options;
+            this.refreshPeriod = refreshPeriod < lowestRefreshInterval ? lowestRefreshInterval : refreshPeriod;
             if (dataService != null)
             {
-                refreshTimer = new Timer(calldata, null, 0, refreshPeriod);
+                refreshTimer = new Timer(this.callData, null, 0, this.refreshPeriod);
             }
         }
 
@@ -33,7 +34,9 @@ namespace Spillway.Services
         // ticks are in milli seconds
         public void SetRefreshRate(int ticks)
         {
-            refreshTimer.Change(0, ticks);
+            // this causes the refresh to immediately ping the servers
+            refreshPeriod = ticks < lowestRefreshInterval ? lowestRefreshInterval : ticks;
+            refreshTimer.Change(0, refreshPeriod);
         }
 
         public void CancelTimer()
@@ -41,9 +44,9 @@ namespace Spillway.Services
             refreshTimer.Dispose();
         }
 
-        private void calldata(object state)
+        private void callData(object state)
         {
-            dataService.RequestUnreadNotifications(null);
+            dataService.RequestUnreadNotifications(options);
         }
 
         #endregion Methods

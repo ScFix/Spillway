@@ -44,6 +44,9 @@ namespace Spillway
             mainViewModel.Tabs.Add(debugPanel);
 #endif
 
+            var dataTimingService = new DataTimingService(dataService, null, 0);
+            mainViewModel.TimingService = dataTimingService;
+
             mainViewModel.SelectedTab = profileViewModel;
             MainWindow mw = new MainWindow();
             mw.DataContext = mainViewModel;

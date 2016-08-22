@@ -119,6 +119,8 @@ namespace Spillway.Services
         public IList<INotification> RequestUnreadNotifications(IOptions options)
         {
             var request = new RestRequest("/2.2/inbox/unread");
+            //var request = new RestRequest("/2.2/inbox/");
+
             // request.AddParameter("site", "stackoverflow");
             request.AddParameter("filter", "!*L6Kz8C2J(yJQxNo");
             request.AddParameter("access_token", AccessToken);
@@ -142,11 +144,6 @@ namespace Spillway.Services
             });
 
             return null;
-        }
-
-        public void StartNotificationFetching()
-        {
-            //Start the thread that will fetch all of the unread messages
         }
 
         #endregion Methods
