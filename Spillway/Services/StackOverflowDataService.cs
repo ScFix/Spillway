@@ -1,7 +1,6 @@
 ﻿using RestSharp;
 using Spillway.Interfaces;
 using Spillway.Utilities;
-//using Spillway.Data.OAuth;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,11 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Spillway.Contracts;
+using Spillway.Models;
 
-namespace Spillway.Models
+namespace Spillway.Services
 {
 
-	public class StackOverflowDataManager : IDataManager
+	public class StackOverflowDataService : IDataManager
 	{
 		#region Members
 		// This Should be passed into via client_id 
@@ -35,7 +35,7 @@ namespace Spillway.Models
 		#endregion //Properties
 
 		#region Events
-		//public delegate void UserChangedHandler(object sender, EventArgs e);
+		// public delegate void UserChangedHandler(object sender, EventArgs e);
 		public event EventHandler UserChangedEvent;
 		public event StackNotifyHandler IncomingNotificationsEvent;
 		#endregion //Events
@@ -61,7 +61,7 @@ namespace Spillway.Models
 			}
 		}
 
-		//This will need to be tested before setting it. However this will get me up and running.
+		// This will need to be tested before setting it. However this will get me up and running.
 		public void SetToken(string accessToken)
 		{
 			AccessToken = accessToken;
@@ -116,7 +116,7 @@ namespace Spillway.Models
 		public IList<INotification> RequestUnreadNotifications(IOptions options)
 		{
 			var request = new RestRequest("/2.2/inbox/unread");
-			//request.AddParameter("site", "stackoverflow");
+			// request.AddParameter("site", "stackoverflow");
 			request.AddParameter("filter", "!*L6Kz8C2J(yJQxNo");
 			request.AddParameter("access_token", AccessToken);
 			request.AddParameter("key", _requestKey);
@@ -126,10 +126,13 @@ namespace Spillway.Models
 				//Trace.WriteLine(response.Data.Items[0]);
 
 				var mail = response.Data;
+
+#if DEBUG
 				mail.Items.ForEach((notification) =>
 				{
 					Debug.WriteLine(notification.Link);
 				});
+#endif
 				// check to make sure someone has subscribed to this.
 				//UserChangedEvent?.Invoke(this, EventArgs.Empty);
 				IncomingNotificationsEvent?.Invoke(this, new StackArgs() { Notifications = (List<Notification>)mail.Items });

@@ -1,5 +1,6 @@
 ﻿using Spillway.Interfaces;
 using Spillway.Models;
+using Spillway.ServicesS;
 using Spillway.Utilities;
 using System;
 using System.Collections.Generic;
@@ -35,8 +36,8 @@ namespace Spillway.ViewModels
 		#endregion //DataManager
 
 		#region Toasts
-		protected ToastManager _Toasts;
-		public ToastManager Toasts
+		protected ToastService _Toasts;
+		public ToastService Toasts
 		{
 			get
 			{

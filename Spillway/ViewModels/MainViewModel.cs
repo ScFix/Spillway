@@ -1,9 +1,5 @@
 ﻿using Spillway.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spillway.ViewModels
 {
@@ -27,17 +23,16 @@ namespace Spillway.ViewModels
 		}
 		#endregion
 
-
-		//This will need to be renamed for in hte end
-		private IList<ISection> _Settings = new List<ISection>();
-
-		public IList<ISection> Settings
+		#region Tabs 
+		private IList<ISection> _Tabs = new List<ISection>();
+		public IList<ISection> Tabs
 		{
-			get { return _Settings; }
-			set { _Settings = value; }
+			get { return _Tabs; }
+			set { _Tabs = value; }
 		}
+		#endregion // Tabs
 
-
+		#region SelectedTab
 		private ISection _SelectedTab;
 		public ISection SelectedTab
 		{
@@ -54,10 +49,19 @@ namespace Spillway.ViewModels
 				}
 			}
 		}
+		#endregion //SelectedTab
 
 		public MainViewModel()
 		{
 		}
 
+		/// <summary>
+		/// This method will wrap up allocated resources that the application uses
+		///  i.e. Closing all background threads
+		/// </summary>
+		internal void Close()
+		{
+			
+		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using Spillway.Models;
 using Spillway.ViewModels;
+using Spillway.Services;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -8,6 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Spillway.ServicesS;
 
 namespace Spillway
 {
@@ -21,12 +23,12 @@ namespace Spillway
 			//Interaction logic for all known connections as well as all other started features
 
 			var mainViewModel = new MainViewModel();
-			var dataManager = new StackOverflowDataManager();
-			var toastManager = new ToastManager();
+			var dataService = new StackOverflowDataService();
+			var toastService = new ToastService();
 
-			dataManager.IncomingNotificationsEvent += toastManager.PostNotifications;
+			dataService.IncomingNotificationsEvent += toastService.PostNotifications;
 
-			var profileViewModel = new ProfileViewModel(dataManager);
+			var profileViewModel = new ProfileViewModel(dataService);
 			var optionsViewModel = new OptionsViewModel();
 
 
@@ -34,17 +36,17 @@ namespace Spillway
 			var token = Spillway.Properties.Settings.Default.Access_Token;
 			if (!String.IsNullOrEmpty(token))
 			{
-				dataManager.SetToken(token);
+				dataService.SetToken(token);
 			}
 
-			mainViewModel.Settings.Add(profileViewModel);
-			mainViewModel.Settings.Add(optionsViewModel);
+			mainViewModel.Tabs.Add(profileViewModel);
+			mainViewModel.Tabs.Add(optionsViewModel);
 
 #if DEBUG
 			var debugPanel = new DebugViewModel();
-			debugPanel.Toasts = toastManager;
-			debugPanel.DataManager = dataManager;
-			mainViewModel.Settings.Add(debugPanel);
+			debugPanel.Toasts = toastService;
+			debugPanel.DataManager = dataService;
+			mainViewModel.Tabs.Add(debugPanel);
 #endif
 
 			mainViewModel.SelectedTab = profileViewModel;

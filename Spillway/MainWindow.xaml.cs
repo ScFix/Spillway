@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spillway.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -66,16 +67,22 @@ namespace Spillway
 
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
-#if DEBUG
-			Trace.WriteLine("This should exit to the system tray");
-#else
+//#if DEBUG
+//			Trace.WriteLine("This should exit to the system tray");
+//#else
 			if (!canClose)
 			{
 				e.Cancel = true;
 				this.Hide();
 			}
-#endif
+			else
+			{
+				// This should call up to the the datacontext and cancel all of the threads
+				var viewModel = this.DataContext as MainViewModel;
+				viewModel.Close();
+			}
+//#endif
 		}
-		
+
 	}
 }

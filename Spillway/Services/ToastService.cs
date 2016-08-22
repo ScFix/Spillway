@@ -4,19 +4,18 @@ using System.IO;
 using Spillway.Utilities;
 using MS.WindowsAPICodePack.Internal;
 using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
-
 using Windows.UI.Notifications;
 using Windows.Data.Xml.Dom;
 using Spillway.Contracts;
-using System.Reflection;
+using Spillway.Models;
 
-namespace Spillway.Models
+namespace Spillway.ServicesS
 {
-	public class ToastManager
+	public class ToastService
 	{
 		private const String APP_ID = "Spillway";
 
-		public ToastManager()
+		public ToastService()
 		{
 			TryCreateShortcut();
 		}

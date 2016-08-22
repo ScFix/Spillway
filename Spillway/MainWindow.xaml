@@ -42,7 +42,7 @@
 		</StackPanel>
 		<ListBox Grid.Row="1"
 				 Grid.Column="0"
-				 ItemsSource="{Binding Settings}"
+				 ItemsSource="{Binding Tabs}"
 				 SelectedItem="{Binding SelectedTab}"
 				 HorizontalContentAlignment="Stretch"
 				 x:Name="ViewSelector">
