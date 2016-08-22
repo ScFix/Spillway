@@ -1,6 +1,6 @@
 ﻿namespace Spillway.ViewModels
 {
-    public class ImagePresentingViewModel : ViewModelBase
-    {
-    }
+	public class ImagePresentingViewModel : ViewModelBase
+	{
+	}
 }

@@ -6,119 +6,119 @@ using System.Windows.Input;
 
 namespace Spillway.ViewModels
 {
-    public class DebugViewModel : ViewModelBase, ISection
-    {
-        #region DataManager
+	public class DebugViewModel : ViewModelBase, ISection
+	{
+		#region DataManager
 
-        protected IDataService _DataManager;
+		protected IDataService _DataManager;
 
-        public IDataService DataManager
-        {
-            get
-            {
-                return _DataManager;
-            }
-            set
-            {
-                if (value != _DataManager)
-                {
-                    _DataManager = value;
-                    OnPropertyChanged("DataManager");
-                }
-            }
-        }
+		public IDataService DataManager
+		{
+			get
+			{
+				return _DataManager;
+			}
+			set
+			{
+				if (value != _DataManager)
+				{
+					_DataManager = value;
+					OnPropertyChanged("DataManager");
+				}
+			}
+		}
 
-        #endregion DataManager
+		#endregion DataManager
 
-        #region Toasts
+		#region Toasts
 
-        protected ToastService _Toasts;
+		protected ToastService _Toasts;
 
-        public ToastService Toasts
-        {
-            get
-            {
-                return _Toasts;
-            }
-            set
-            {
-                if (value != _Toasts)
-                {
-                    _Toasts = value;
-                    OnPropertyChanged("Toasts");
-                }
-            }
-        }
+		public ToastService Toasts
+		{
+			get
+			{
+				return _Toasts;
+			}
+			set
+			{
+				if (value != _Toasts)
+				{
+					_Toasts = value;
+					OnPropertyChanged("Toasts");
+				}
+			}
+		}
 
-        #endregion Toasts
+		#endregion Toasts
 
-        #region SendSampleToast
+		#region SendSampleToast
 
-        protected ICommand _SendSampleToast = null;
+		protected ICommand _SendSampleToast = null;
 
-        public ICommand SendSampleToast
-        {
-            get
-            {
-                if (_SendSampleToast == null)
-                {
-                    _SendSampleToast = new RelayCommand(SendSampleToastExecute, CanSendSampleToast);
-                }
-                return _SendSampleToast;
-            }
-        }
+		public ICommand SendSampleToast
+		{
+			get
+			{
+				if (_SendSampleToast == null)
+				{
+					_SendSampleToast = new RelayCommand(SendSampleToastExecute, CanSendSampleToast);
+				}
+				return _SendSampleToast;
+			}
+		}
 
-        private bool CanSendSampleToast(object obj)
-        {
-            return true;
-        }
+		private bool CanSendSampleToast(object obj)
+		{
+			return true;
+		}
 
-        private void SendSampleToastExecute(object obj)
-        {
-            Notification n = new Notification();
-            n.Type = "EXAMPLE";
-            n.Date = 0;
-            n.Link = "http:\\google.com";
+		private void SendSampleToastExecute(object obj)
+		{
+			Notification n = new Notification();
+			n.Type = "EXAMPLE";
+			n.Date = 0;
+			n.Link = "http:\\google.com";
 
-            Toasts.ShowToast(n);
-        }
+			Toasts.ShowToast(n);
+		}
 
-        #endregion SendSampleToast
+		#endregion SendSampleToast
 
-        #region RequestSampleData
+		#region RequestSampleData
 
-        protected ICommand _RequestSampleData = null;
+		protected ICommand _RequestSampleData = null;
 
-        public ICommand RequestSampleData
-        {
-            get
-            {
-                if (_RequestSampleData == null)
-                {
-                    _RequestSampleData = new RelayCommand(RequestSampleDataExecute, CanRequestSampleData);
-                }
-                return _RequestSampleData;
-            }
-        }
+		public ICommand RequestSampleData
+		{
+			get
+			{
+				if (_RequestSampleData == null)
+				{
+					_RequestSampleData = new RelayCommand(RequestSampleDataExecute, CanRequestSampleData);
+				}
+				return _RequestSampleData;
+			}
+		}
 
-        private bool CanRequestSampleData(object obj)
-        {
-            return true;
-        }
+		private bool CanRequestSampleData(object obj)
+		{
+			return true;
+		}
 
-        private void RequestSampleDataExecute(object obj)
-        {
-            DataManager.RequestUnreadNotifications(null);
-        }
+		private void RequestSampleDataExecute(object obj)
+		{
+			DataManager.RequestUnreadNotifications(null);
+		}
 
-        #endregion RequestSampleData
+		#endregion RequestSampleData
 
-        public string SectionName
-        {
-            get
-            {
-                return "Debug Panel";
-            }
-        }
-    }
+		public string SectionName
+		{
+			get
+			{
+				return "Debug Panel";
+			}
+		}
+	}
 }

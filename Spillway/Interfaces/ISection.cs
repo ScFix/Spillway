@@ -2,8 +2,8 @@
 
 namespace Spillway.Interfaces
 {
-    public interface ISection
-    {
-        String SectionName { get; }
-    }
+	public interface ISection
+	{
+		String SectionName { get; }
+	}
 }

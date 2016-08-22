@@ -1,6 +1,6 @@
 ﻿namespace Spillway.Interfaces
 {
-    public interface IOptions
-    {
-    }
+	public interface IOptions
+	{
+	}
 }

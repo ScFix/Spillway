@@ -2,14 +2,14 @@
 
 namespace Spillway.Views
 {
-    /// <summary>
-    /// Interaction logic for ProfileOverview.xaml
-    /// </summary>
-    public partial class ProfileOverview : UserControl
-    {
-        public ProfileOverview()
-        {
-            InitializeComponent();
-        }
-    }
+	/// <summary>
+	/// Interaction logic for ProfileOverview.xaml
+	/// </summary>
+	public partial class ProfileOverview : UserControl
+	{
+		public ProfileOverview()
+		{
+			InitializeComponent();
+		}
+	}
 }

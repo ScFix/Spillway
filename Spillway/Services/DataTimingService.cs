@@ -3,52 +3,53 @@ using System.Threading;
 
 namespace Spillway.Services
 {
-    public class DataTimingService
-    {
-        #region Members
+	public class DataTimingService
+	{
+		#region Members
 
-        private Timer refreshTimer = null;
-        public const int lowestRefreshInterval = 300000; // lowest you can refresh is set to 5 minutes
-        private int refreshPeriod = 0;
-        private IDataService dataService = null;
-        private IOptions options = null;
-        #endregion Members
+		private Timer refreshTimer = null;
+		public const int lowestRefreshInterval = 300000; // lowest you can refresh is set to 5 minutes
+		private int refreshPeriod = 0;
+		private IDataService dataService = null;
+		private IOptions options = null;
 
-        #region Constructors
+		#endregion Members
 
-        public DataTimingService(IDataService dataService, IOptions options = null, int refreshPeriod = 0)
-        {
-            this.dataService = dataService;
-            this.options = options;
-            this.refreshPeriod = refreshPeriod < lowestRefreshInterval ? lowestRefreshInterval : refreshPeriod;
-            if (dataService != null)
-            {
-                refreshTimer = new Timer(this.callData, null, 0, this.refreshPeriod);
-            }
-        }
+		#region Constructors
 
-        #endregion Constructors
+		public DataTimingService(IDataService dataService, IOptions options = null, int refreshPeriod = 0)
+		{
+			this.dataService = dataService;
+			this.options = options;
+			this.refreshPeriod = refreshPeriod < lowestRefreshInterval ? lowestRefreshInterval : refreshPeriod;
+			if (dataService != null)
+			{
+				refreshTimer = new Timer(this.callData, null, 0, this.refreshPeriod);
+			}
+		}
 
-        #region Methods
+		#endregion Constructors
 
-        // ticks are in milli seconds
-        public void SetRefreshRate(int ticks)
-        {
-            // this causes the refresh to immediately ping the servers
-            refreshPeriod = ticks < lowestRefreshInterval ? lowestRefreshInterval : ticks;
-            refreshTimer.Change(0, refreshPeriod);
-        }
+		#region Methods
 
-        public void CancelTimer()
-        {
-            refreshTimer.Dispose();
-        }
+		// ticks are in milli seconds
+		public void SetRefreshRate(int ticks)
+		{
+			// this causes the refresh to immediately ping the servers
+			refreshPeriod = ticks < lowestRefreshInterval ? lowestRefreshInterval : ticks;
+			refreshTimer.Change(0, refreshPeriod);
+		}
 
-        private void callData(object state)
-        {
-            dataService.RequestUnreadNotifications(options);
-        }
+		public void CancelTimer()
+		{
+			refreshTimer.Dispose();
+		}
 
-        #endregion Methods
-    }
+		private void callData(object state)
+		{
+			dataService.RequestUnreadNotifications(options);
+		}
+
+		#endregion Methods
+	}
 }
