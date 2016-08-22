@@ -13,7 +13,7 @@ using Spillway.Models;
 namespace Spillway.Services
 {
 
-	public class StackOverflowDataService : IDataManager
+	public class StackOverflowDataService : IDataService
 	{
 		#region Members
 		// This Should be passed into via client_id 

@@ -86,7 +86,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Interfaces\IDataManager.cs" />
+    <Compile Include="Interfaces\IDataService.cs" />
     <Compile Include="Interfaces\INotification.cs" />
     <Compile Include="Interfaces\IOptions.cs" />
     <Compile Include="Interfaces\IProfile.cs" />

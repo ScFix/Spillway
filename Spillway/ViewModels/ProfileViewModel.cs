@@ -22,7 +22,7 @@ namespace Spillway.ViewModels
 	{
 		#region Members
 
-		private IDataManager dataManager;
+		private IDataService dataService;
 		private string TokenTag = "access_token=";
 
 		#endregion //Members
@@ -34,10 +34,10 @@ namespace Spillway.ViewModels
 		}
 #endif
 
-		public ProfileViewModel(IDataManager dataManager)
+		public ProfileViewModel(IDataService dataService)
 		{
-			this.dataManager = dataManager;
-			this.dataManager.UserChangedEvent += DataManager_UserChangedEvent;
+			this.dataService = dataService;
+			this.dataService.UserChangedEvent += DataManager_UserChangedEvent;
 			ImageCache.ImageLoaded += ImageLoachedEvent;
 		}
 
@@ -95,7 +95,7 @@ namespace Spillway.ViewModels
 		{
 			get
 			{
-				return dataManager.CurrentUser;
+				return dataService.CurrentUser;
 			}
 		}
 
@@ -126,7 +126,7 @@ namespace Spillway.ViewModels
 		private void SubmitTokenUrlExecute(object obj)
 		{
 			string accessToken = ParseTokenOutOfUrl();
-			dataManager.SetToken(accessToken);
+			dataService.SetToken(accessToken);
 
 			ViewState = ProfileViewState.CurrentProfile;
 		}
@@ -159,7 +159,7 @@ namespace Spillway.ViewModels
 
 		private void AuthorizeApplicationExecute(object obj)
 		{
-			if (!dataManager.HasCurrentSessionOpen())
+			if (!dataService.HasCurrentSessionOpen())
 			{
 				RequestPermissionFromStackOverflow();
 			}
@@ -201,7 +201,7 @@ namespace Spillway.ViewModels
 			// call the data function in spillway.data
 			// Note(Matthew): This is going to be a bit messy to begin with. I am going to include the Data interface to be referenced in this project. It will need to be accessed througha  wrapper this way I will try
 			// To make thias generic as possibe. 
-			dataManager.RequestUserVerification();
+			dataService.RequestUserVerification();
 			// Note(Matthew): we will need to tansition the state of the ProfileViewModel into accepting Tokens
 			ViewState = ProfileViewState.RequestToken;
 		}

@@ -112,12 +112,12 @@ namespace Spillway.ServicesS
 
 		private void ToastDismissed(ToastNotification sender, ToastDismissedEventArgs args)
 		{
-			Console.WriteLine("Toast Dismissed");
+			Debug.WriteLine("Toast Dismissed");
 		}
 
 		private void ToastActivated(ToastNotification sender, object args)
 		{
-			Console.WriteLine("Toast Activated");
+			Debug.WriteLine("Toast Activated");
 			try
 			{
 				String s = (String)(args.GetType().GetProperty("Arguments").GetValue(args, null));
@@ -125,7 +125,7 @@ namespace Spillway.ServicesS
 			}
 			catch (Exception)
 			{
-				Console.WriteLine("Error!");
+				Debug.WriteLine("Error!");
 			}
 		}
 	}

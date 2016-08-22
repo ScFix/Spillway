@@ -17,8 +17,8 @@ namespace Spillway.ViewModels
 	{
 
 		#region DataManager
-		protected IDataManager _DataManager;
-		public IDataManager DataManager
+		protected IDataService _DataManager;
+		public IDataService DataManager
 		{
 			get
 			{
