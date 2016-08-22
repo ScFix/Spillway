@@ -6,10 +6,10 @@ using MS.WindowsAPICodePack.Internal;
 using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
 using Windows.UI.Notifications;
 using Windows.Data.Xml.Dom;
-using Spillway.Contracts;
 using Spillway.Models;
+using Spillway.Interfaces;
 
-namespace Spillway.ServicesS
+namespace Spillway.Services
 {
 	public class ToastService
 	{

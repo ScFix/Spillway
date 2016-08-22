@@ -1,5 +1,5 @@
 ﻿using RestSharp.Deserializers;
-using Spillway.Contracts;
+using Spillway.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
