@@ -63,6 +63,4 @@
 		<Setter Property="Background"
 				Value="#333333" />
 	</Style>
-
-
 </ResourceDictionary>

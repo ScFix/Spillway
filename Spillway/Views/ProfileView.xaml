@@ -38,8 +38,5 @@
 						Grid.Row="1"
 						x:Name="content"
 						ContentTemplateSelector="{StaticResource ProfileTemplateSelector}" />
-
-
-
 	</Grid>
 </UserControl>

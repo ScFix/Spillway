@@ -1,51 +1,54 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
+
 namespace Spillway.Utilities
 {
-	public class RelayCommand : ICommand
-	{
-		#region Members
-		readonly Action<object> _action;
-		readonly Predicate<object> _actionCanExecute;
-		#endregion
+    public class RelayCommand : ICommand
+    {
+        #region Members
 
-		#region Constructors
-		public RelayCommand(Action<object> action)
-			: this(action, null)
-		{
-		}
+        private readonly Action<object> _action;
+        private readonly Predicate<object> _actionCanExecute;
 
-		public RelayCommand(Action<object> action, Predicate<object> actionCanExecute)
-		{
-			if (action == null)
-			{
-				throw new ArgumentNullException("action");
-			}
-			_action = action;
-			_actionCanExecute = actionCanExecute;
-		}
-		#endregion //Constructors
+        #endregion Members
 
-		#region ICommand  Members
-		public bool CanExecute(object parameter = null)
-		{
-			return _actionCanExecute == null ? true : _actionCanExecute(parameter);
-		}
+        #region Constructors
 
-		public event EventHandler CanExecuteChanged
-		{
-			add { CommandManager.RequerySuggested += value; }
-			remove { CommandManager.RequerySuggested -= value; }
-		}
+        public RelayCommand(Action<object> action)
+            : this(action, null)
+        {
+        }
 
-		public void Execute(object parameter = null)
-		{
-			_action(parameter);
-		}
-		#endregion //ICommand
-	}
+        public RelayCommand(Action<object> action, Predicate<object> actionCanExecute)
+        {
+            if (action == null)
+            {
+                throw new ArgumentNullException("action");
+            }
+            _action = action;
+            _actionCanExecute = actionCanExecute;
+        }
+
+        #endregion Constructors
+
+        #region ICommand  Members
+
+        public bool CanExecute(object parameter = null)
+        {
+            return _actionCanExecute == null ? true : _actionCanExecute(parameter);
+        }
+
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+
+        public void Execute(object parameter = null)
+        {
+            _action(parameter);
+        }
+
+        #endregion ICommand  Members
+    }
 }

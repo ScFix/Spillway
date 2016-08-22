@@ -3,65 +3,71 @@ using System.Collections.Generic;
 
 namespace Spillway.ViewModels
 {
-	public class MainViewModel : ViewModelBase
-	{
-		#region ProjectName
-		private string _ProjectName = "Spillway";
+    public class MainViewModel : ViewModelBase
+    {
+        #region ProjectName
 
-		public string ProjectName
-		{
-			get
-			{
-				return _ProjectName;
+        private string _ProjectName = "Spillway";
 
-			}
-			set
-			{
-				_ProjectName = value;
-				OnPropertyChanged("ProjectName");
-			}
-		}
-		#endregion
+        public string ProjectName
+        {
+            get
+            {
+                return _ProjectName;
+            }
+            set
+            {
+                _ProjectName = value;
+                OnPropertyChanged("ProjectName");
+            }
+        }
 
-		#region Tabs 
-		private IList<ISection> _Tabs = new List<ISection>();
-		public IList<ISection> Tabs
-		{
-			get { return _Tabs; }
-			set { _Tabs = value; }
-		}
-		#endregion // Tabs
+        #endregion ProjectName
 
-		#region SelectedTab
-		private ISection _SelectedTab;
-		public ISection SelectedTab
-		{
-			get
-			{
-				return _SelectedTab;
-			}
-			set
-			{
-				if (_SelectedTab != value)
-				{
-					_SelectedTab = value;
-					OnPropertyChanged("SelectedTab");
-				}
-			}
-		}
-		#endregion //SelectedTab
+        #region Tabs
 
-		public MainViewModel()
-		{
-		}
+        private IList<ISection> _Tabs = new List<ISection>();
 
-		/// <summary>
-		/// This method will wrap up allocated resources that the application uses
-		///  i.e. Closing all background threads
-		/// </summary>
-		internal void Close()
-		{
-			
-		}
-	}
+        public IList<ISection> Tabs
+        {
+            get { return _Tabs; }
+            set { _Tabs = value; }
+        }
+
+        #endregion Tabs
+
+        #region SelectedTab
+
+        private ISection _SelectedTab;
+
+        public ISection SelectedTab
+        {
+            get
+            {
+                return _SelectedTab;
+            }
+            set
+            {
+                if (_SelectedTab != value)
+                {
+                    _SelectedTab = value;
+                    OnPropertyChanged("SelectedTab");
+                }
+            }
+        }
+
+        #endregion SelectedTab
+
+        public MainViewModel()
+        {
+        }
+
+        /// <summary>
+        /// This method will wrap up allocated resources that the application uses
+        ///  i.e. Closing all background threads
+        /// </summary>
+        internal void Close()
+        {
+        }
+    }
 }

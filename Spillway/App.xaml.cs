@@ -1,62 +1,53 @@
-﻿using Spillway.Models;
+﻿using Spillway.Services;
 using Spillway.ViewModels;
-using Spillway.Services;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Spillway
 {
-	/// <summary>
-	/// Interaction logic for App.xaml
-	/// </summary>
-	public partial class App : Application
-	{
-		public App()
-		{
-			//Interaction logic for all known connections as well as all other started features
+    /// <summary>
+    /// Interaction logic for App.xaml
+    /// </summary>
+    public partial class App : Application
+    {
+        public App()
+        {
+            //Interaction logic for all known connections as well as all other started features
 
-			var mainViewModel = new MainViewModel();
+            var mainViewModel = new MainViewModel();
 
-			//declare services
-			var dataService = new StackOverflowDataService();
-			var toastService = new ToastService();
+            //declare services
+            var dataService = new StackOverflowDataService();
+            var toastService = new ToastService();
 
-			dataService.IncomingNotificationsEvent += toastService.PostNotifications;
+            dataService.IncomingNotificationsEvent += toastService.PostNotifications;
 
-			var profileViewModel = new ProfileViewModel(dataService);
-			var optionsViewModel = new OptionsViewModel();
+            var profileViewModel = new ProfileViewModel(dataService);
+            var optionsViewModel = new OptionsViewModel();
 
+            // NOTE(Matthew): this will start the call for seeing if the token is actually valid.
+            var token = Spillway.Properties.Settings.Default.Access_Token;
+            if (!String.IsNullOrEmpty(token))
+            {
+                dataService.SetToken(token);
+            }
 
-			// NOTE(Matthew): this will start the call for seeing if the token is actually valid. 
-			var token = Spillway.Properties.Settings.Default.Access_Token;
-			if (!String.IsNullOrEmpty(token))
-			{
-				dataService.SetToken(token);
-			}
-			
-			// Note(Matthew): Adding in the views
-			mainViewModel.Tabs.Add(profileViewModel);
-			mainViewModel.Tabs.Add(optionsViewModel);
+            // Note(Matthew): Adding in the views
+            mainViewModel.Tabs.Add(profileViewModel);
+            mainViewModel.Tabs.Add(optionsViewModel);
 
 #if DEBUG
-			// Note(Matthew): Added in a debug panel to test ui functionality so to easially debug in future cases. I might want to remove this later
-			var debugPanel = new DebugViewModel();
-			debugPanel.Toasts = toastService;
-			debugPanel.DataManager = dataService;
-			mainViewModel.Tabs.Add(debugPanel);
+            // Note(Matthew): Added in a debug panel to test ui functionality so to easially debug in future cases. I might want to remove this later
+            var debugPanel = new DebugViewModel();
+            debugPanel.Toasts = toastService;
+            debugPanel.DataManager = dataService;
+            mainViewModel.Tabs.Add(debugPanel);
 #endif
 
-
-			mainViewModel.SelectedTab = profileViewModel;
-			MainWindow mw = new MainWindow();
-			mw.DataContext = mainViewModel;
-			mw.Show();
-		}
-	}
+            mainViewModel.SelectedTab = profileViewModel;
+            MainWindow mw = new MainWindow();
+            mw.DataContext = mainViewModel;
+            mw.Show();
+        }
+    }
 }

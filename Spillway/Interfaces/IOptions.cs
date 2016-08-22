@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spillway.Interfaces
+﻿namespace Spillway.Interfaces
 {
-	public interface IOptions
-	{
-		
-	}
+    public interface IOptions
+    {
+    }
 }

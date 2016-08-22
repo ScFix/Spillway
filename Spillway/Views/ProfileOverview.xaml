@@ -55,6 +55,5 @@
 				<Label Content="{Binding CurrentUser.Badges.Bronze}" />
 			</StackPanel>
 		</StackPanel>
-
 	</Grid>
 </UserControl>

@@ -2,215 +2,220 @@
 using Spillway.Models;
 using Spillway.Utilities;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace Spillway.ViewModels
 {
-	public enum ProfileViewState
-	{
-		Authorize,
-		RequestToken,
-		CurrentProfile
-	}
-	public class ProfileViewModel : ViewModelBase, ISection, IProfile
-	{
-		#region Members
+    public enum ProfileViewState
+    {
+        Authorize,
+        RequestToken,
+        CurrentProfile
+    }
 
-		private IDataService dataService;
-		private string TokenTag = "access_token=";
+    public class ProfileViewModel : ViewModelBase, ISection, IProfile
+    {
+        #region Members
 
-		#endregion //Members
+        private IDataService dataService;
+        private string TokenTag = "access_token=";
+
+        #endregion Members
 
 #if Debug
 		public ProfileViewModel()
 		{
-			
 		}
 #endif
 
-		public ProfileViewModel(IDataService dataService)
-		{
-			this.dataService = dataService;
-			this.dataService.UserChangedEvent += DataManager_UserChangedEvent;
-			ImageCache.ImageLoaded += ImageLoachedEvent;
-		}
+        public ProfileViewModel(IDataService dataService)
+        {
+            this.dataService = dataService;
+            this.dataService.UserChangedEvent += DataManager_UserChangedEvent;
+            ImageCache.ImageLoaded += ImageLoachedEvent;
+        }
 
-		private void ImageLoachedEvent(object sender, ImageLoadedEventArgs e)
-		{
-			if (e.LoadedUrl == CurrentUser.ImageUrl)
-			{
-				OnPropertyChanged("CurrentUser");
-			}
-		}
+        private void ImageLoachedEvent(object sender, ImageLoadedEventArgs e)
+        {
+            if (e.LoadedUrl == CurrentUser.ImageUrl)
+            {
+                OnPropertyChanged("CurrentUser");
+            }
+        }
 
-		#region Properites
+        #region Properites
 
-		#region ViewState
-		protected ProfileViewState _ViewState = ProfileViewState.Authorize;
-		public ProfileViewState ViewState
-		{
-			get
-			{
-				return _ViewState;
-			}
-			set
-			{
-				if (value != _ViewState)
-				{
-					_ViewState = value;
-					OnPropertyChanged("ViewState");
-				}
-			}
-		}
-		#endregion //ViewState
+        #region ViewState
 
-		#region TokenUrl
-		protected String _TokenUrl;
-		public String TokenUrl
-		{
-			get
-			{
-				return _TokenUrl;
-			}
-			set
-			{
-				if (value != _TokenUrl)
-				{
-					_TokenUrl = value;
-					OnPropertyChanged("TokenUrl");
-				}
-			}
-		}
-		#endregion //Token
+        protected ProfileViewState _ViewState = ProfileViewState.Authorize;
 
+        public ProfileViewState ViewState
+        {
+            get
+            {
+                return _ViewState;
+            }
+            set
+            {
+                if (value != _ViewState)
+                {
+                    _ViewState = value;
+                    OnPropertyChanged("ViewState");
+                }
+            }
+        }
 
+        #endregion ViewState
 
-		public User CurrentUser
-		{
-			get
-			{
-				return dataService.CurrentUser;
-			}
-		}
+        #region TokenUrl
 
-		#endregion //Propeties
+        protected String _TokenUrl;
 
-		#region Commands
+        public String TokenUrl
+        {
+            get
+            {
+                return _TokenUrl;
+            }
+            set
+            {
+                if (value != _TokenUrl)
+                {
+                    _TokenUrl = value;
+                    OnPropertyChanged("TokenUrl");
+                }
+            }
+        }
 
-		#region SubmitTokenUrl
-		protected ICommand _SubmitTokenUrl = null;
-		public ICommand SubmitTokenUrl
-		{
-			get
-			{
-				if (_SubmitTokenUrl == null)
-				{
-					_SubmitTokenUrl = new RelayCommand(SubmitTokenUrlExecute, CanSubmitTokenUrl);
-				}
-				return _SubmitTokenUrl;
-			}
-		}
+        #endregion TokenUrl
 
-		private bool CanSubmitTokenUrl(object obj)
-		{
+        public User CurrentUser
+        {
+            get
+            {
+                return dataService.CurrentUser;
+            }
+        }
 
-			return TokenUrl != null ? TokenUrl.Contains(TokenTag) : false;
-		}
+        #endregion Properites
 
-		private void SubmitTokenUrlExecute(object obj)
-		{
-			string accessToken = ParseTokenOutOfUrl();
-			dataService.SetToken(accessToken);
+        #region Commands
 
-			ViewState = ProfileViewState.CurrentProfile;
-		}
+        #region SubmitTokenUrl
 
-		private string ParseTokenOutOfUrl()
-		{
-			return TokenUrl.Substring(TokenUrl.IndexOf(TokenTag) + TokenTag.Length);
-		}
-		#endregion //SubmitTokenUrl
+        protected ICommand _SubmitTokenUrl = null;
 
+        public ICommand SubmitTokenUrl
+        {
+            get
+            {
+                if (_SubmitTokenUrl == null)
+                {
+                    _SubmitTokenUrl = new RelayCommand(SubmitTokenUrlExecute, CanSubmitTokenUrl);
+                }
+                return _SubmitTokenUrl;
+            }
+        }
 
-		#region AuthorizeApplication
-		protected ICommand _AuthorizeApplication = null;
-		public ICommand AuthorizeApplication
-		{
-			get
-			{
-				if (_AuthorizeApplication == null)
-				{
-					_AuthorizeApplication = new RelayCommand(AuthorizeApplicationExecute, CanAuthorizeApplication);
-				}
-				return _AuthorizeApplication;
-			}
-		}
+        private bool CanSubmitTokenUrl(object obj)
+        {
+            return TokenUrl != null ? TokenUrl.Contains(TokenTag) : false;
+        }
 
-		private bool CanAuthorizeApplication(object obj)
-		{
-			return true;
-		}
+        private void SubmitTokenUrlExecute(object obj)
+        {
+            string accessToken = ParseTokenOutOfUrl();
+            dataService.SetToken(accessToken);
 
-		private void AuthorizeApplicationExecute(object obj)
-		{
-			if (!dataService.HasCurrentSessionOpen())
-			{
-				RequestPermissionFromStackOverflow();
-			}
-			else
-			{
-				throw new Exception("You are currently logged in, and the views are incorrectly displaying");
-			}
-		}
-		#endregion //AuthorizeApplication
+            ViewState = ProfileViewState.CurrentProfile;
+        }
 
-		#endregion //Commands
+        private string ParseTokenOutOfUrl()
+        {
+            return TokenUrl.Substring(TokenUrl.IndexOf(TokenTag) + TokenTag.Length);
+        }
 
-		#region Event Handlers
-		private void DataManager_UserChangedEvent(object sender, EventArgs e)
-		{
-			ViewState = ProfileViewState.CurrentProfile;
-			//tunnel the changed event to the view
-			OnPropertyChanged("CurrentUser");
-		}
-		#endregion // Event Handlers
+        #endregion SubmitTokenUrl
 
-		#region ISection Properties
-		public override string ToString()
-		{
-			return "Profile";
-		}
+        #region AuthorizeApplication
 
+        protected ICommand _AuthorizeApplication = null;
 
-		public String SectionName
-		{
-			get { return ToString(); }
-		}
-		#endregion // ISection Properties
+        public ICommand AuthorizeApplication
+        {
+            get
+            {
+                if (_AuthorizeApplication == null)
+                {
+                    _AuthorizeApplication = new RelayCommand(AuthorizeApplicationExecute, CanAuthorizeApplication);
+                }
+                return _AuthorizeApplication;
+            }
+        }
 
-		#region IProfile Implementation
+        private bool CanAuthorizeApplication(object obj)
+        {
+            return true;
+        }
 
-		public void RequestPermissionFromStackOverflow()
-		{
-			// call the data function in spillway.data
-			// Note(Matthew): This is going to be a bit messy to begin with. I am going to include the Data interface to be referenced in this project. It will need to be accessed througha  wrapper this way I will try
-			// To make thias generic as possibe. 
-			dataService.RequestUserVerification();
-			// Note(Matthew): we will need to tansition the state of the ProfileViewModel into accepting Tokens
-			ViewState = ProfileViewState.RequestToken;
-		}
+        private void AuthorizeApplicationExecute(object obj)
+        {
+            if (!dataService.HasCurrentSessionOpen())
+            {
+                RequestPermissionFromStackOverflow();
+            }
+            else
+            {
+                throw new Exception("You are currently logged in, and the views are incorrectly displaying");
+            }
+        }
 
-		public void StartNotificationUpdate()
-		{
-			throw new NotImplementedException();
-		}
+        #endregion AuthorizeApplication
 
-		#endregion //IProfile Implementation
-	}
+        #endregion Commands
+
+        #region Event Handlers
+
+        private void DataManager_UserChangedEvent(object sender, EventArgs e)
+        {
+            ViewState = ProfileViewState.CurrentProfile;
+            //tunnel the changed event to the view
+            OnPropertyChanged("CurrentUser");
+        }
+
+        #endregion Event Handlers
+
+        #region ISection Properties
+
+        public override string ToString()
+        {
+            return "Profile";
+        }
+
+        public String SectionName
+        {
+            get { return ToString(); }
+        }
+
+        #endregion ISection Properties
+
+        #region IProfile Implementation
+
+        public void RequestPermissionFromStackOverflow()
+        {
+            // call the data function in spillway.data
+            // Note(Matthew): This is going to be a bit messy to begin with. I am going to include the Data interface to be referenced in this project. It will need to be accessed througha  wrapper this way I will try
+            // To make thias generic as possibe.
+            dataService.RequestUserVerification();
+            // Note(Matthew): we will need to tansition the state of the ProfileViewModel into accepting Tokens
+            ViewState = ProfileViewState.RequestToken;
+        }
+
+        public void StartNotificationUpdate()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion IProfile Implementation
+    }
 }
