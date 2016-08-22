@@ -121,7 +121,7 @@ namespace Spillway.Models
 			request.AddParameter("access_token", AccessToken);
 			request.AddParameter("key", _requestKey);
 			// Todo(Matthew): finish this response
-			var asyncHandle = client.ExecuteAsync<UnreadMail>(request, response =>
+			var asyncHandle = client.ExecuteAsync<Mail>(request, response =>
 			{
 				//Trace.WriteLine(response.Data.Items[0]);
 

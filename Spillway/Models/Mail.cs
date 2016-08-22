@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Spillway.Models
 {
 	[DataContract()]
-	public class UnreadMail
+	public class Mail
 	{
 		[DataMember(Name = "items")]
 		public List<Notification> Items { get; set; }
