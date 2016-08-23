@@ -12,8 +12,9 @@ namespace Spillway
 	{
 		public App()
 		{
-			//Interaction logic for all known connections as well as all other started features
 
+
+			//Interaction logic for all known connections as well as all other started features
 			var mainViewModel = new MainViewModel();
 
 			//declare services
