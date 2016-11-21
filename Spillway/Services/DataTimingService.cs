@@ -40,7 +40,7 @@ namespace Spillway.Services
 			refreshTimer.Change(0, refreshPeriod);
 		}
 
-		public void CancelTimer()
+		public void CloseTimer()
 		{
 			refreshTimer.Dispose();
 		}

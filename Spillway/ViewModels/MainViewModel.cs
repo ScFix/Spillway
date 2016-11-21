@@ -75,7 +75,7 @@ namespace Spillway.ViewModels
 		/// </summary>
 		internal void Close()
 		{
-			TimingService?.CancelTimer();
+			TimingService?.CloseTimer();
 		}
 	}
 }
