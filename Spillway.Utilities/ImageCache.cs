@@ -59,7 +59,7 @@ namespace Spillway.Utilities
 
 		private static void NotifyImageLoaded(object sender, RunWorkerCompletedEventArgs e)
 		{
-			System.Windows.Threading.Dispatcher.CurrentDispatcher.InvokeAsync(() =>
+			System.Windows.Threading.Dispatcher.CurrentDispatcher.Invoke(() =>
 			{
 				ImageLoaded?.Invoke(null, new ImageLoadedEventArgs(e.Result.ToString()));
 			});
