@@ -10,6 +10,14 @@ namespace Spillway.ViewModels
 {
     public class DebugViewModel : ViewModelBase, ISection
     {
+        public string SectionName
+        {
+            get
+            {
+                return "Debug Panel";
+            }
+        }
+
         #region DataManager
 
         protected IDataService _DataManager;
@@ -29,7 +37,7 @@ namespace Spillway.ViewModels
                 }
             }
         }
-        
+
         #endregion DataManager
 
         #region Toasts
@@ -155,13 +163,5 @@ namespace Spillway.ViewModels
         }
 
         #endregion RequestSampleData
-
-        public string SectionName
-        {
-            get
-            {
-                return "Debug Panel";
-            }
-        }
     }
 }
