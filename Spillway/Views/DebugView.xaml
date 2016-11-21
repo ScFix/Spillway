@@ -22,5 +22,11 @@
 				Margin="10">
 			Send Notifcation
 		</Button>
+		<Button Command="{Binding DataFlowSample}"
+				Width="100"
+				Height="80"
+				Margin="10">
+			Data Flow Sample
+		</Button>
 	</StackPanel>
 </UserControl>

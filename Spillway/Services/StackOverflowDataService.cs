@@ -98,6 +98,8 @@ namespace Spillway.Services
 
         public IList<INotification> RequestUnreadNotifications(IOptions options)
         {
+            Trace.WriteLine("Requesting Sample Data.");
+
             var request = new RestRequest("/2.2/inbox/unread");
             //var request = new RestRequest("/2.2/inbox/");
 

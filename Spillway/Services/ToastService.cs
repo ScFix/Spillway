@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.IO;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
+using Microsoft.Win32;
 
 namespace Spillway.Services
 {
@@ -41,6 +42,7 @@ namespace Spillway.Services
             if (!File.Exists(shortcutPath))
             {
                 InstallShortcut(shortcutPath);
+                
                 return true;
             }
             return false;

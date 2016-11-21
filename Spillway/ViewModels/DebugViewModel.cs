@@ -2,6 +2,8 @@
 using Spillway.Models;
 using Spillway.Services;
 using Spillway.Utilities;
+using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace Spillway.ViewModels
@@ -27,7 +29,7 @@ namespace Spillway.ViewModels
                 }
             }
         }
-
+        
         #endregion DataManager
 
         #region Toasts
@@ -51,6 +53,11 @@ namespace Spillway.ViewModels
         }
 
         #endregion Toasts
+
+        #region Messages
+        public MessagesViewModel Messages { get; set; }
+
+        #endregion //Messages
 
         #region SendSampleToast
 
@@ -83,7 +90,41 @@ namespace Spillway.ViewModels
             Toasts.ShowToast(n);
         }
 
-        #endregion SendSampleToast
+        #endregion // SendSampleToast
+
+        #region DataFlowSample
+
+        protected ICommand _DataFlowSample = null;
+        public ICommand DataFlowSample
+        {
+            get
+            {
+                if (_DataFlowSample == null)
+                {
+                    _DataFlowSample = new RelayCommand(DataFlowSampleExectue, CanDataFlowSample);
+                }
+                return _DataFlowSample;
+            }
+        }
+
+        private bool CanDataFlowSample(object obj)
+        {
+            return true;
+        }
+        private void DataFlowSampleExectue(object obj) {
+            StackArgs sa = new StackArgs();
+            sa.Notifications = new List<Notification>();
+            sa.Notifications.Add(new Notification()
+            {
+                Date = (long)DateTime.Now.ToOADate(),
+                IsUnread = 1,
+                Link = "http://www.Google.com",
+                Type = "something"
+            });
+
+            Messages?.ProcessNotifications(this, sa);
+        }
+        #endregion // Data  Flow Sample
 
         #region RequestSampleData
 

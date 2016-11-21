@@ -36,6 +36,7 @@ namespace Spillway
 
             // Note(Matthew): Adding in the views
             mainViewModel.Tabs.Add(profileViewModel);
+            mainViewModel.Tabs.Add(messagesviewModel);
             mainViewModel.Tabs.Add(optionsViewModel);
 
 #if DEBUG
@@ -43,6 +44,7 @@ namespace Spillway
             var debugPanel = new DebugViewModel();
             debugPanel.Toasts = toastService;
             debugPanel.DataManager = dataService;
+            debugPanel.Messages = messagesviewModel;
             mainViewModel.Tabs.Add(debugPanel);
 #endif
 
