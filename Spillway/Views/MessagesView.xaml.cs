@@ -3,11 +3,11 @@
 namespace Spillway.Views
 {
     /// <summary>
-    /// Interaction logic for ProfileOverview.xaml
+    /// Interaction logic for MessagesView.xaml
     /// </summary>
-    public partial class ProfileOverview : UserControl
+    public partial class MessagesView : UserControl
     {
-        public ProfileOverview()
+        public MessagesView()
         {
             InitializeComponent();
         }

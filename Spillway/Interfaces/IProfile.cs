@@ -1,7 +1,7 @@
 ﻿namespace Spillway.Interfaces
 {
-	public interface IProfile
-	{
-		void RequestPermissionFromStackOverflow();
-	}
+    public interface IProfile
+    {
+        void RequestPermissionFromStackOverflow();
+    }
 }
