@@ -92,27 +92,7 @@ namespace Spillway.Services
 
 				Spillway.Properties.Settings.Default.Access_Token = this.AccessToken;
 				Spillway.Properties.Settings.Default.Save();
-
 				//start fetching the notifications in a background thread!
-			});
-		}
-
-		private void GetNotifications()
-		{
-			var request = new RestRequest("/2.2/me/notifications");
-			request.AddParameter("site", "stackoverflow");
-			request.AddParameter("filter", "!6P-iTlNdFXI*(");
-			request.AddParameter("access_token", AccessToken);
-			request.AddParameter("key", _requestKey);
-			// Todo(Matthew): finish this response
-			var asyncHandle = client.ExecuteAsync<Users>(request, response =>
-			{
-				//Trace.WriteLine(response.Data.Items[0]);
-
-				CurrentUser = response.Data.Items[0];
-				// check to make sure someone has subscribed to this.
-				//UserChangedEvent?.Invoke(this, EventArgs.Empty);
-				IncomingNotificationsEvent?.Invoke(this, new StackArgs() { });
 			});
 		}
 

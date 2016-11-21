@@ -6,10 +6,11 @@ namespace Spillway.Services
 	public class DataTimingService
 	{
 		#region Members
-
-		private Timer refreshTimer = null;
 		public const int lowestRefreshInterval = 300000; // lowest you can refresh is set to 5 minutes
 		private int refreshPeriod = 0;
+
+
+		private Timer refreshTimer = null;
 		private IDataService dataService = null;
 		private IOptions options = null;
 
