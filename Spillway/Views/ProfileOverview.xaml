@@ -32,9 +32,6 @@
 			<ColumnDefinition />
 		</Grid.ColumnDefinitions>
 
-		<Label VerticalAlignment="Center"
-			   HorizontalAlignment="Center"
-			   Grid.ColumnSpan="2">Profile Overview</Label>
 		<Image Grid.Row="1"
 			   Source="{Binding CurrentUser.ImageUrl, Converter={StaticResource ImageFromUrl}}"
 			   VerticalAlignment="Top"

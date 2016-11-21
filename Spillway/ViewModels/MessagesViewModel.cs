@@ -4,6 +4,9 @@ using System;
 using Spillway.Services;
 using System.Linq;
 using Spillway.Interfaces;
+using System.Windows.Input;
+using Spillway.Utilities;
+using System.Diagnostics;
 
 namespace Spillway.ViewModels
 {
@@ -24,7 +27,7 @@ namespace Spillway.ViewModels
         {
             get
             {
-                return "All Notifications"; 
+                return "All Notifications";
             }
         }
 
@@ -47,6 +50,37 @@ namespace Spillway.ViewModels
         private string GetNotificationKey(Notification notification)
         {
             return notification.Link;
+        }
+
+
+        #region NavigateTo
+        private ICommand _NavigateTo = null;
+        public ICommand NavigateTo
+        {
+            get
+            {
+                if (_NavigateTo == null)
+                {
+                    _NavigateTo = new RelayCommand(NavigateToExecute, CanNavigateTo);
+                }
+                return _NavigateTo;
+            }
+        }
+
+        private bool CanNavigateTo(object obj)
+        {
+            return true;
+        }
+
+        private void NavigateToExecute(object obj)
+        {
+            var notification = obj as Notification;
+            if (notification != null)
+            {
+                //this shout be a different call to a shared code base with the notification that is launching on the toast click
+                Process.Start(notification.Link);
+            }
+            #endregion //NavigateTo
         }
     }
 }

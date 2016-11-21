@@ -133,6 +133,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\DateConverter.cs" />
     <Compile Include="Interfaces\IDataService.cs" />
     <Compile Include="Interfaces\INotification.cs" />
     <Compile Include="Interfaces\IOptions.cs" />

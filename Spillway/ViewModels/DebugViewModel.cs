@@ -114,9 +114,11 @@ namespace Spillway.ViewModels
         private void DataFlowSampleExectue(object obj) {
             StackArgs sa = new StackArgs();
             sa.Notifications = new List<Notification>();
+            // Note(Matthew): Stack overflow sends everything in Epoch time
+            // In order to get all the time to mesh up correctly you need to run everything throuhg the converter
             sa.Notifications.Add(new Notification()
             {
-                Date = (long)DateTime.Now.ToOADate(),
+                Date = DateUtil.ToUnixTime(DateTime.Now),
                 IsUnread = 1,
                 Link = "http://www.Google.com",
                 Type = "something"
