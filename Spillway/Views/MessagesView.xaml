@@ -9,8 +9,7 @@
 			 mc:Ignorable="d"
 			 d:DesignHeight="300"
 			 d:DesignWidth="300"
-			 d:DataContext="{d:DesignInstance Type=vm:MessagesViewModel, IsDesignTimeCreatable=True}"
-			 >
+			 d:DataContext="{d:DesignInstance Type=vm:MessagesViewModel, IsDesignTimeCreatable=True}">
 	<UserControl.Resources>
 		<DataTemplate DataType="{x:Type m:Notification}">
 			<local:NotificationView DblClickCommand="{Binding DataContext.NavigateTo, RelativeSource={RelativeSource AncestorType={x:Type local:MessagesView}}}"
@@ -18,7 +17,8 @@
 		</DataTemplate>
 	</UserControl.Resources>
 	<Grid>
-		<ListBox ItemsSource="{Binding Notifications}">
+		<ListBox ItemsSource="{Binding Notifications}"
+				 BorderBrush="Transparent">
 			<ListBox.Resources>
 				<Style TargetType="ListBoxItem">
 					<Setter Property="Focusable"
