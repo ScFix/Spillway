@@ -261,6 +261,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Delete.png" />
     <Content Include="Resources\Images\so-icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

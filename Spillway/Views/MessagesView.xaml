@@ -13,13 +13,13 @@
 			 >
 	<UserControl.Resources>
 		<DataTemplate DataType="{x:Type m:Notification}">
-			<local:NotificationView />
+			<local:NotificationView DblClickCommand="{Binding DataContext.NavigateTo, RelativeSource={RelativeSource AncestorType={x:Type local:MessagesView}}}"
+									DblClickParam="{Binding}" />
 		</DataTemplate>
 	</UserControl.Resources>
 	<Grid>
 		<ListBox ItemsSource="{Binding Notifications}">
 			<ListBox.Resources>
-				
 				<Style TargetType="ListBoxItem">
 					<Setter Property="Focusable"
 							Value="False" />

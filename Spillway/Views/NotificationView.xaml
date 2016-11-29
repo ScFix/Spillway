@@ -9,25 +9,27 @@
 			 mc:Ignorable="d"
 			 d:DesignHeight="100"
 			 d:DesignWidth="350"
-			 d:DataContext="{d:DesignInstance Type=m:Notification, IsDesignTimeCreatable=True}">
+			 d:DataContext="{d:DesignInstance Type=m:Notification, IsDesignTimeCreatable=True}"
+			 MouseDoubleClick="UserControl_MouseDoubleClick">
 	<UserControl.Resources>
 		<conv:DateConverter x:Key="dateConv" />
 	</UserControl.Resources>
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition />
-			<RowDefinition  />
+			<RowDefinition />
 			<RowDefinition />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="Auto" />
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
 		</Grid.ColumnDefinitions>
 		<Image Grid.RowSpan="3"
-			   Source="../Resources/Images/so-icon.png" 
+			   Source="../Resources/Images/so-icon.png"
 			   MaxWidth="40"
-			   MaxHeight="40"/>
+			   MaxHeight="40" />
 		<Label Grid.Column="1"
 			   Grid.Row="0"
 			   Grid.RowSpan="2"
@@ -40,11 +42,11 @@
 			   Content="{Binding Date, Converter={StaticResource dateConv}}" />
 		<Button Grid.Row="0"
 				Grid.RowSpan="3"
-				Grid.Column="2"
-				
-				Command="{Binding DataContext.NavigateTo, RelativeSource={RelativeSource AncestorType={x:Type local:MessagesView}}}"
-				CommandParameter="{Binding}">
-			Navigate
+				Grid.Column="3"
+				BorderBrush="Transparent">
+			<Image Source="../Resources/Delete.png"
+				   Width="30"
+				   Height="30" />
 		</Button>
 	</Grid>
 </UserControl>
