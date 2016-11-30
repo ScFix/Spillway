@@ -131,9 +131,9 @@ namespace Spillway.Services
 				//Trace.WriteLine(response.Data.Items[0]);
 
 				var mail = response.Data;
-
+                
 #if DEBUG
-                mail.Items.ForEach((notification) =>
+                mail.Items?.ForEach((notification) =>
                 {
                     Debug.WriteLine(notification.Link);
                 });
