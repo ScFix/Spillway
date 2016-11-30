@@ -3,6 +3,7 @@ using Spillway.ViewModels;
 using System;
 using System.Windows;
 using Squirrel;
+using System.Threading.Tasks;
 
 namespace Spillway
 {
@@ -14,10 +15,26 @@ namespace Spillway
         public App()
         {
 
-            using (var mgr = new UpdateManager(@"W:\Public Repositories\Spillway\Releases"))
+            Task.Run(async () =>
             {
-               mgr.UpdateApp();
-            }
+                try
+                {
+                    using (var mgr = new UpdateManager((@"W:\Public Repositories\Spillway\Releases")))
+                    {
+                        var re = await mgr.UpdateApp();
+                        if (re != null)
+                        {
+                            UpdateManager.RestartApp();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            });
+            //MessageBox.Show("This is an updated version!");
+
             //Interaction logic for all known connections as well as all other started features
             var mainViewModel = new MainViewModel();
 

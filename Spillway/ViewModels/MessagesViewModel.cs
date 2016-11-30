@@ -33,7 +33,8 @@ namespace Spillway.ViewModels
 
         internal void ProcessNotifications(object sender, StackArgs e)
         {
-            foreach (var notification in e.Notifications)
+
+            e.Notifications?.ForEach(notification =>
             {
                 string key = GetNotificationKey(notification);
                 if (!_KnownNotifications.ContainsKey(key))
@@ -43,8 +44,7 @@ namespace Spillway.ViewModels
                     // this can be optimized so that this is only called once but it doesn't matter for right now 
                     OnPropertyChanged("Notifications");
                 }
-
-            }
+            });
         }
 
         private string GetNotificationKey(Notification notification)
