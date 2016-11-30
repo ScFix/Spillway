@@ -2,123 +2,166 @@
 using Spillway.Models;
 using Spillway.Services;
 using Spillway.Utilities;
+using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace Spillway.ViewModels
 {
-	public class DebugViewModel : ViewModelBase, ISection
-	{
-		#region DataManager
+    public class DebugViewModel : ViewModelBase, ISection
+    {
+        public string SectionName
+        {
+            get
+            {
+                return "Debug Panel";
+            }
+        }
 
-		protected IDataService _DataManager;
+        #region DataManager
 
-		public IDataService DataManager
-		{
-			get
-			{
-				return _DataManager;
-			}
-			set
-			{
-				if (value != _DataManager)
-				{
-					_DataManager = value;
-					OnPropertyChanged("DataManager");
-				}
-			}
-		}
+        protected IDataService _DataManager;
 
-		#endregion DataManager
+        public IDataService DataManager
+        {
+            get
+            {
+                return _DataManager;
+            }
+            set
+            {
+                if (value != _DataManager)
+                {
+                    _DataManager = value;
+                    OnPropertyChanged("DataManager");
+                }
+            }
+        }
 
-		#region Toasts
+        #endregion DataManager
 
-		protected ToastService _Toasts;
+        #region Toasts
 
-		public ToastService Toasts
-		{
-			get
-			{
-				return _Toasts;
-			}
-			set
-			{
-				if (value != _Toasts)
-				{
-					_Toasts = value;
-					OnPropertyChanged("Toasts");
-				}
-			}
-		}
+        protected ToastService _Toasts;
 
-		#endregion Toasts
+        public ToastService Toasts
+        {
+            get
+            {
+                return _Toasts;
+            }
+            set
+            {
+                if (value != _Toasts)
+                {
+                    _Toasts = value;
+                    OnPropertyChanged("Toasts");
+                }
+            }
+        }
 
-		#region SendSampleToast
+        #endregion Toasts
 
-		protected ICommand _SendSampleToast = null;
+        #region Messages
+        public MessagesViewModel Messages { get; set; }
 
-		public ICommand SendSampleToast
-		{
-			get
-			{
-				if (_SendSampleToast == null)
-				{
-					_SendSampleToast = new RelayCommand(SendSampleToastExecute, CanSendSampleToast);
-				}
-				return _SendSampleToast;
-			}
-		}
+        #endregion //Messages
 
-		private bool CanSendSampleToast(object obj)
-		{
-			return true;
-		}
+        #region SendSampleToast
 
-		private void SendSampleToastExecute(object obj)
-		{
-			Notification n = new Notification();
-			n.Type = "EXAMPLE";
-			n.Date = 0;
-			n.Link = "http:\\google.com";
+        protected ICommand _SendSampleToast = null;
 
-			Toasts.ShowToast(n);
-		}
+        public ICommand SendSampleToast
+        {
+            get
+            {
+                if (_SendSampleToast == null)
+                {
+                    _SendSampleToast = new RelayCommand(SendSampleToastExecute, CanSendSampleToast);
+                }
+                return _SendSampleToast;
+            }
+        }
 
-		#endregion SendSampleToast
+        private bool CanSendSampleToast(object obj)
+        {
+            return true;
+        }
 
-		#region RequestSampleData
+        private void SendSampleToastExecute(object obj)
+        {
+            Notification n = new Notification();
+            n.Type = "EXAMPLE";
+            n.Date = 0;
+            n.Link = "http:\\google.com";
 
-		protected ICommand _RequestSampleData = null;
+            Toasts.ShowToast(n);
+        }
 
-		public ICommand RequestSampleData
-		{
-			get
-			{
-				if (_RequestSampleData == null)
-				{
-					_RequestSampleData = new RelayCommand(RequestSampleDataExecute, CanRequestSampleData);
-				}
-				return _RequestSampleData;
-			}
-		}
+        #endregion // SendSampleToast
 
-		private bool CanRequestSampleData(object obj)
-		{
-			return true;
-		}
+        #region DataFlowSample
 
-		private void RequestSampleDataExecute(object obj)
-		{
-			DataManager.RequestUnreadNotifications(null);
-		}
+        protected ICommand _DataFlowSample = null;
+        public ICommand DataFlowSample
+        {
+            get
+            {
+                if (_DataFlowSample == null)
+                {
+                    _DataFlowSample = new RelayCommand(DataFlowSampleExectue, CanDataFlowSample);
+                }
+                return _DataFlowSample;
+            }
+        }
 
-		#endregion RequestSampleData
+        private bool CanDataFlowSample(object obj)
+        {
+            return true;
+        }
+        private void DataFlowSampleExectue(object obj) {
+            StackArgs sa = new StackArgs();
+            sa.Notifications = new List<Notification>();
+            // Note(Matthew): Stack overflow sends everything in Epoch time
+            // In order to get all the time to mesh up correctly you need to run everything throuhg the converter
+            sa.Notifications.Add(new Notification()
+            {
+                Date = DateUtil.ToUnixTime(DateTime.Now),
+                IsUnread = 1,
+                Link = "http://www.Google.com",
+                Type = "something"
+            });
 
-		public string SectionName
-		{
-			get
-			{
-				return "Debug Panel";
-			}
-		}
-	}
+            Messages?.ProcessNotifications(this, sa);
+        }
+        #endregion // Data  Flow Sample
+
+        #region RequestSampleData
+
+        protected ICommand _RequestSampleData = null;
+
+        public ICommand RequestSampleData
+        {
+            get
+            {
+                if (_RequestSampleData == null)
+                {
+                    _RequestSampleData = new RelayCommand(RequestSampleDataExecute, CanRequestSampleData);
+                }
+                return _RequestSampleData;
+            }
+        }
+
+        private bool CanRequestSampleData(object obj)
+        {
+            return true;
+        }
+
+        private void RequestSampleDataExecute(object obj)
+        {
+            DataManager.RequestUnreadNotifications(null);
+        }
+
+        #endregion RequestSampleData
+    }
 }

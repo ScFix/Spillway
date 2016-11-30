@@ -10,4 +10,7 @@
 	<DataTemplate DataType="{x:Type vm:DebugViewModel}">
 		<v:DebugView />
 	</DataTemplate>
+	<DataTemplate DataType="{x:Type vm:MessagesViewModel}">
+		<v:MessagesView />
+	</DataTemplate>
 </ResourceDictionary>

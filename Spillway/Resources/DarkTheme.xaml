@@ -16,6 +16,7 @@
 		<Setter Property="Background"
 				Value="Transparent" />
 	</Style>
+	
 	<Style TargetType="StackPanel">
 		<Setter Property="Background"
 				Value="Transparent" />
@@ -46,6 +47,28 @@
 	</Style>
 
 	<!--General purpose styles-->
+
+	<Style TargetType="Label"
+		   x:Key="MiddleSizedLabel"
+		   BasedOn="{StaticResource {x:Type Label}}">
+		<Setter Property="FontStyle"
+				Value="Normal" />
+		<Setter Property="FontFamily"
+				Value="Arial" />
+		<Setter Property="FontSize"
+				Value="16" />
+	</Style>
+
+	<Style TargetType="Label"
+		   x:Key="SmallSizedLabel"
+		   BasedOn="{StaticResource {x:Type Label}}">
+		<Setter Property="FontStyle"
+				Value="Normal" />
+		<Setter Property="FontFamily"
+				Value="Arial" />
+		<Setter Property="FontSize"
+				Value="12" />
+	</Style>
 
 	<Style TargetType="Label"
 		   x:Key="TitleLabel"

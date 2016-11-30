@@ -8,6 +8,8 @@
 		mc:Ignorable="d"
 		Width="800"
 		Height="500"
+		MaxWidth="800"
+		MaxHeight="500"
 		Closing="Window_Closing"
 		Title="">
 	<Window.Resources>

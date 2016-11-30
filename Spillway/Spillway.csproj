@@ -133,6 +133,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\DateConverter.cs" />
     <Compile Include="Interfaces\IDataService.cs" />
     <Compile Include="Interfaces\INotification.cs" />
     <Compile Include="Interfaces\IOptions.cs" />
@@ -151,11 +152,18 @@
     <Compile Include="ViewModels\ImagePresentingViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\DebugViewModel.cs" />
+    <Compile Include="ViewModels\MessagesViewModel.cs" />
     <Compile Include="ViewModels\OptionsViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\DebugView.xaml.cs">
       <DependentUpon>DebugView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MessagesView.xaml.cs">
+      <DependentUpon>MessagesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NotificationView.xaml.cs">
+      <DependentUpon>NotificationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProfileAuthorize.xaml.cs">
       <DependentUpon>ProfileAuthorize.xaml</DependentUpon>
@@ -190,6 +198,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DebugView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MessagesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NotificationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -245,6 +261,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Delete.png" />
     <Content Include="Resources\Images\so-icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

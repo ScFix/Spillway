@@ -25,12 +25,15 @@ namespace Spillway
             var dataService = new StackOverflowDataService();
             var toastService = new ToastService();
 
-            dataService.IncomingNotificationsEvent += toastService.PostNotifications;
-
             var profileViewModel = new ProfileViewModel(dataService);
+            var messagesviewModel = new MessagesViewModel();
             var optionsViewModel = new OptionsViewModel();
 
-            // NOTE(Matthew): this will start the call for seeing if the token is actually valid.
+            // Note(Matthew): Hooking into everything that needs to be notified that new messages are coming in from stack overflow
+            dataService.IncomingNotificationsEvent += toastService.PostNotifications;
+            dataService.IncomingNotificationsEvent += messagesviewModel.ProcessNotifications;
+
+            // Note(Matthew): this will start the call for seeing if the token is actually valid.
             var token = Spillway.Properties.Settings.Default.Access_Token;
             if (!String.IsNullOrEmpty(token))
             {
@@ -39,6 +42,7 @@ namespace Spillway
 
             // Note(Matthew): Adding in the views
             mainViewModel.Tabs.Add(profileViewModel);
+            mainViewModel.Tabs.Add(messagesviewModel);
             mainViewModel.Tabs.Add(optionsViewModel);
 
 #if DEBUG
@@ -46,6 +50,7 @@ namespace Spillway
             var debugPanel = new DebugViewModel();
             debugPanel.Toasts = toastService;
             debugPanel.DataManager = dataService;
+            debugPanel.Messages = messagesviewModel;
             mainViewModel.Tabs.Add(debugPanel);
 #endif
 
