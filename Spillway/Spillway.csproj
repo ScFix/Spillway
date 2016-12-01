@@ -262,7 +262,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\spillway.ico" />
+    <Content Include="Resources\Images\spillway.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Resources\Images\spillway.png" />
     <Resource Include="Resources\Delete.png" />
     <Content Include="Resources\Images\so-icon.png">
