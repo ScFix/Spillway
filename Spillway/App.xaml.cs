@@ -19,9 +19,9 @@ namespace Spillway
             {
                 try
                 {
-                    using (var mgr = new UpdateManager((@"W:\Public Repositories\Spillway\Releases")))
+                    using (var mgr = UpdateManager.GitHubUpdateManager(@"https://github.com/ScFix/Spillway/releases"))
                     {
-                        var re = await mgr.UpdateApp();
+                        var re = await mgr.Result.UpdateApp();
                         if (re != null)
                         {
                             UpdateManager.RestartApp();
