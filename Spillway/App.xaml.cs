@@ -12,27 +12,24 @@ namespace Spillway
     /// </summary>
     public partial class App : Application
     {
-        public App()
+        protected override void OnStartup(StartupEventArgs e)
         {
-
+            base.OnStartup(e);
             Task.Run(async () =>
             {
-                try
+                using (var mgr = UpdateManager.GitHubUpdateManager(@"https://github.com/ScFix/Spillway"))
                 {
-                    using (var mgr = UpdateManager.GitHubUpdateManager(@"https://github.com/ScFix/Spillway/releases"))
+                    var re = await mgr.Result.UpdateApp();
+                    if (re != null)
                     {
-                        var re = await mgr.Result.UpdateApp();
-                        if (re != null)
-                        {
-                            UpdateManager.RestartApp();
-                        }
+                        UpdateManager.RestartApp();
                     }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+
             });
+        }
+        public App()
+        {
             //MessageBox.Show("This is an updated version!");
 
             //Interaction logic for all known connections as well as all other started features
