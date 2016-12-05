@@ -10,9 +10,11 @@ This project is slowly being developed. I am a constant user of StackOverflow. M
  - ~~Show the toast in a windows 10 system~~
  - ~~Display all messages in order to navigate at will~~
  - ~~Create an installer~~
- - A hosted solution for others to download updates
+ - ~~ A hosted solution for others to download updates ~~
 
 ### 2. Increasing functionality
+ - Get the app to have an option to put itself in the startup queue
+ - Add a more complete profile overview
+ - Add additional analytics for the data that is being offered. 
  - Allow for notifications from other StackExchange communities.
  - Allow for customisable options on what displays notifications.
- - Design a better user interface
