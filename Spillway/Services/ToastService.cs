@@ -18,7 +18,7 @@ namespace Spillway.Services
 
         public ToastService()
         {
-            TryCreateShortcut();
+            //TryCreateShortcut();
         }
 
         internal void PostNotifications(object sender, StackArgs e)
@@ -38,12 +38,12 @@ namespace Spillway.Services
         private bool TryCreateShortcut()
         {
             //Don't like these static links
-            String shortcutPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Windows\\Start Menu\\Programs\\Spillway.lnk";
-            if (!File.Exists(shortcutPath))
-            {
-                InstallShortcut(shortcutPath);
-                return true;
-            }
+            //String shortcutPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Windows\\Start Menu\\Programs\\Spillway.lnk";
+            //if (!File.Exists(shortcutPath))
+            //{
+            //    InstallShortcut(shortcutPath);
+            //    return true;
+            //}
             return false;
         }
 

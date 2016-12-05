@@ -4,6 +4,7 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:local="clr-namespace:Spillway.Views"
+			 xmlns:conv="clr-namespace:Spillway.Utilities.Converters;assembly=Spillway.Utilities"
 			 xmlns:vm="clr-namespace:Spillway.ViewModels"
 			 mc:Ignorable="d"
 			 d:DesignHeight="300"
@@ -11,14 +12,23 @@
 			 d:DataContext="{d:DesignInstance Type=vm:ProfileViewModel, IsDesignTimeCreatable=True}">
 	<UserControl.Resources>
 		<!--<ResourceDictionary Source="/Spillway;component/Resources/DataTemplates.xaml" />-->
+		<conv:BoolToVisibility x:Key="BoolToVis"
+							   VisibleOnTrue="True" />
 	</UserControl.Resources>
 	<Grid HorizontalAlignment="Stretch"
 		  VerticalAlignment="Stretch">
 		<StackPanel VerticalAlignment="Center">
 			<Label>Instructions</Label>
-			<TextBlock> After you authorize the application please copy and paste the url into the box below submit the url for verification.</TextBlock>
-			<TextBox Text="{Binding TokenUrl, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-			<Button Command="{Binding SubmitTokenUrl}">Submit</Button>
+			<TextBlock Margin="10,5,10,5"
+					   TextWrapping="Wrap"> After you authorize the application please copy and paste the url into the box below submit the url for verification.</TextBlock>
+			<TextBox Margin="10,5,10,5"
+					 Text="{Binding TokenUrl, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+			<Button Margin="10,5,10,5"
+					Command="{Binding SubmitTokenUrl}"
+					Visibility="{Binding CanSubmitToken,Converter={StaticResource BoolToVis}}">
+				Submit
+			</Button>
 		</StackPanel>
+
 	</Grid>
 </UserControl>

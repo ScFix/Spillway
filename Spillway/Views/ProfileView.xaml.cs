@@ -43,7 +43,7 @@ namespace Spillway.Views
 
         public void UpdateContent()
         {
-            // HACK(Matthe); This is a hack till I figure out a better way to sort out the data template selector and updating the view properly
+            // HACK(Matthew): This is a hack till I figure out a better way to sort out the data template selector and updating the view properly
             Dispatcher.Invoke(() =>
             {
                 content.Content = null;

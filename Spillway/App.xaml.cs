@@ -40,7 +40,7 @@ namespace Spillway
 			var token = Spillway.Properties.Settings.Default.Access_Token;
 			if (!String.IsNullOrEmpty(token))
 			{
-				dataService.SetToken(token);
+				//dataService.SetToken(token);
 			}
 
 			// Note(Matthew): Adding in the views

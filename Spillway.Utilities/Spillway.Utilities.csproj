@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttachedProperties\DataTemplateParameters.cs" />
+    <Compile Include="Converters\BoolToVisibility.cs" />
     <Compile Include="Converters\UrlImageConverter.cs" />
     <Compile Include="DateUtil.cs" />
     <Compile Include="ImageCache.cs" />
