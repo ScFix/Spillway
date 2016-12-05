@@ -13,6 +13,7 @@ This project is slowly being developed. I am a constant user of StackOverflow. M
  - ~~A hosted solution for others to download updates~~
 
 ### 2. Increasing functionality
+ - Enfocing only a single instance to be open at a time.
  - Get the app to have an option to put itself in the startup queue
  - Add a more complete profile overview
  - Add additional analytics for the data that is being offered. 
