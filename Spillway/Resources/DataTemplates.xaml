@@ -13,4 +13,7 @@
 	<DataTemplate DataType="{x:Type vm:MessagesViewModel}">
 		<v:MessagesView />
 	</DataTemplate>
+	<DataTemplate DataType="{x:Type vm:OptionsViewModel}">
+		<v:OptionsView />
+	</DataTemplate>
 </ResourceDictionary>
